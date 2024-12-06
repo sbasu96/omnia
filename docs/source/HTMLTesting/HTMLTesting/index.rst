@@ -2,4 +2,4 @@ Test
 =====
 
 .. raw:: html
-    :file: index.html
+    :file: Index.html
