@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choice Boxes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="box" id="choice1" onclick="printChoice(1)">
+            Choice 1
+        </div>
+        <div class="box" id="choice2" onclick="printChoice(2)">
+            Choice 2
+        </div>
+    </div>
+
+    <!-- Output section where the result will be displayed -->
+    <div id="output" class="output">
+        <p id="outputText">Click a choice to see the output.</p>
+    </div>
+
+    <script>
+        function printChoice(choice) {
+            // Update the content of the output section
+            const outputText = document.getElementById('outputText');
+            outputText.textContent = choice;  // Display the choice number (1 or 2)
+            
+            // Change the background color of the output section
+            document.getElementById('output').style.backgroundColor = 'blue';
+        }
+    </script>
+</body>
+</html>
+
