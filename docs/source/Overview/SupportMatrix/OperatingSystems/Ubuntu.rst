@@ -5,6 +5,7 @@ Ubuntu
 OS Version Control Plane Cluster Nodes
 ========== ============= =============
 22.04        Yes            Yes
+24.04        Yes            Yes
 ========== ============= =============
 
 .. note::
