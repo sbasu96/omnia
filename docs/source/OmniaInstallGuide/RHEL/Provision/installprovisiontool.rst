@@ -103,8 +103,6 @@ To deploy the Omnia provision tool, ensure that ``input/provision_config.yml``, 
 
     * After executing ``discovery_provision.yml`` playbook, user can check the log file available at ``/var/log/omnia.log`` for more information.
 
-    * racadm and ipmitool are installed on all target nodes except Ubuntu 20.04.
-
     * Ansible playbooks by default run concurrently on 5 nodes. To change this, update the ``forks`` value in ``ansible.cfg`` present in the respective playbook directory.
 
     * While the ``admin_nic`` on cluster nodes is configured by Omnia to be static, the public NIC IP address should be configured by user.
