@@ -1,11 +1,21 @@
-Configuring additional NICs and Kernel Parameters on the nodes
-----------------------------------------------------------------
-After the ``discovery_provision.yml`` playbook has been executed and the nodes have booted up, additional NICs or OS Kernel command-line parameters can be configured on the cluster nodes using the ``server_spec_update.yml`` playbook. For more information about the supported kernel command-line parameters, `click here <https://docs.kernel.org/admin-guide/kernel-parameters.html>`_.
+Configure additional NICs, assign IP rules, and specify Kernel Parameters and on the nodes
+===========================================================================================
+
+Omnia provides two ways of configuring additional NICs, assigning IP rules, and defining Kernel command-line parameters on the nodes:
+
+1. You can choose to do these during cluster provisioning itself. To do this, you need to add the necessary inputs to the ``input/network_spec.yml`` and ``input/server_spec.yml`` and then run the ``discovery_provision.yml`` playbook. To know more about configuring them during provisioning, `click here <>`_.
+2. Or you can run the ``server_spec_update.yml`` playbook separately after the ``discovery_provision.yml`` playbook has been executed and the nodes have booted up. To do so, you need to add the necessary inputs to the ``input/network_spec.yml`` and ``input/server_spec.yml`` and then run the ``server_spec_update.yml`` playbook.
+
+.. note:: To know more about the supported kernel command-line parameters, `click here <https://docs.kernel.org/admin-guide/kernel-parameters.html>`_.
+
+**Playbook objectives**
+
 The ``server_spec_update.yml`` playbook can be used to do the following tasks:
 
     * Configure additional NICs on the nodes.
     * Configure OS Kernel command-line parameters on the nodes.
-    * Configure both additional NICs and OS Kernel command-line parameters on the nodes.
+    * Assign IP rules to the additional NICs.
+    * Configure additional NICs on the nodes, assign IP rules to them, and set the necessary OS kernel command-line parameters.
 
 **Prerequisites**
 
@@ -16,6 +26,7 @@ The ``server_spec_update.yml`` playbook can be used to do the following tasks:
     * ``nic_name``: The name of the NIC on which the administrative network is accessible to the control plane.
     * ``netmask_bits``: The 32-bit "mask" used to divide an IP address into subnets and specify the network's available hosts.
     * ``static_range``: The static range of IPs to be provisioned on target nodes. This indicates that only a certain static range is available to Omnia.
+    * ``gateway``: The gateway through which the NIC is connected to the switch.
 
 * In addition to the above mentioned properties, the following properties are also applicable and can be added in ``input/network_spec.yml`` for additional NICs:
 
@@ -28,10 +39,13 @@ The ``server_spec_update.yml`` playbook can be used to do the following tasks:
 
 * Modify the ``input/server_spec.yml`` file with the additional NIC information and/or OS command-line kernel parameters that you want to add or alter for the target nodes. Ensure the following:
 
-    * All NICs listed in the ``server_spec.yml`` file are grouped into categories (groups for servers). The field ``Categories:`` should not be edited out of the ``input/server_spec.yml`` file.
-    * The name of the NIC specified in the file (in this sample, ``ensp0``, ``ensp0.5``, and ``eno1``) is the unique identifier of NICs in the file.
-    * The property ``nictype`` indicates what kind of NIC is in use (ethernet, infiniband, or vlan). If the ``nictype`` is set to ``vlan``, ensure to specify a primary NIC for the VLAN using the property ``nicdevices``.
-    * The OS Kernel command-line parameters should be provided under ``cmdline`` field. If you want to provide multiple kernel parameters, ensure that they are separated by a "space".
+    * ``Categories``: All NICs listed in the ``server_spec.yml`` file are grouped into categories (groups for servers). The field ``Categories`` should not be edited out of the ``input/server_spec.yml`` file.
+    * The name of the NIC specified in the file (in the below sample, ``ensp0``, ``ensp0.5``, and ``eno1``) is the unique identifier of NICs in the file.
+    * ``nictype``: The property ``nictype`` indicates what kind of NIC is in use (ethernet, infiniband, or vlan). If the ``nictype`` is set to ``vlan``, ensure to specify a primary NIC for the VLAN using the property ``nicdevices``.
+    * ``cmdline``: The OS Kernel command-line parameters should be provided under ``cmdline`` field. If you want to provide multiple kernel parameters, ensure that they are separated by a "space".
+    * ``metric``: Network metric value is a value assigned to an IP route for a network interface that indicates the cost of using that route.
+
+.. caution:: If you intend to configure NICs or assign IP rule to bare-metal servers, ensure that you are aware of the NIC name on that server.
 
 .. note::
 
