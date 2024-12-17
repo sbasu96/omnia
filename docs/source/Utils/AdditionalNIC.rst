@@ -3,7 +3,7 @@ Configure additional NICs, assign IP rules, and specify Kernel Parameters and on
 
 Omnia provides two ways of configuring additional NICs, assigning IP rules, and defining Kernel command-line parameters on the nodes:
 
-1. You can choose to do these during cluster provisioning itself. To do this, you need to add the necessary inputs to the ``input/network_spec.yml`` and ``input/server_spec.yml`` and then run the ``discovery_provision.yml`` playbook. To know more about configuring them during provisioning, `click here <>`_.
+1. You can choose to do these during cluster provisioning itself. To do this, you need to add the necessary inputs to the ``input/network_spec.yml`` and ``input/server_spec.yml`` and then run the ``discovery_provision.yml`` playbook. To know more about configuring them during provisioning, `click here <../OmniaInstallGuide/Ubuntu/Provision/installprovisiontool.html#running-the-provision-tool>`_.
 2. Or you can run the ``server_spec_update.yml`` playbook separately after the ``discovery_provision.yml`` playbook has been executed and the nodes have booted up. To do so, you need to add the necessary inputs to the ``input/network_spec.yml`` and ``input/server_spec.yml`` and then run the ``server_spec_update.yml`` playbook.
 
 .. note:: To know more about the supported kernel command-line parameters, `click here <https://docs.kernel.org/admin-guide/kernel-parameters.html>`_.
