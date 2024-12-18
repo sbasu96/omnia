@@ -15,7 +15,7 @@ Network
 
 * Enable the JSON gateway: ``json-gw enable``
 
-⦾ **During consecutive runs of the** ``server_spec_update.yml`` **playbook, why are the additional NICs not configured as per the inputs provided in the** ``input/server_spec.yml`` **file or the node status goes to** ``Failed`` **state?**
+⦾ **During consecutive runs of the** ``server_spec_update.yml`` **playbook, why are the additional NICs not configured as per the inputs provided in the** ``input/server_spec.yml`` **file, or the node status goes to a** ``Failed`` **state?**
 
 **Potential Cause**: Omnia does not support modifying the category definitions (for example, ``nic_name``, ``nicnetwork``, or ``nictype``) in ``input/server_spec.yml`` or changing the category details in the inventory file provided, during consecutive runs of the ``server_spec_update.yml`` playbook.
 
