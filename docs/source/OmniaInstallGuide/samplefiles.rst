@@ -177,45 +177,35 @@ software_config.json for RHEL/Rocky Linux
 
         }
 
-inventory file for IP rule assignment
----------------------------------------
+inventory file for additional NIC and Kernel parameter configuration
+-------------------------------------------------------------------------
+
+.. note:: You can use either or combine node IP, service tags, or hostname in the below inventory file.
+
+Choose fom any of the templates provided below:
 
 ::
 
-     all:
-       hosts:
-         node1:
-           nic_info:
-             - { nic_name: eno20195np0, gateway: 10.10.1.254, metric: 101 }
-             - { nic_name: eno20295np0, gateway: 10.10.2.254, metric: 102 }
-             - { nic_name: eno20095np0, gateway: 10.10.3.254, metric: 103 }
-             - { nic_name: eno19995np0, gateway: 10.10.4.254, metric: 104 }
-             - { nic_name: eno19595np0, gateway: 10.10.5.254, metric: 105 }
-             - { nic_name: eno19695np0, gateway: 10.10.6.254, metric: 106 }
-             - { nic_name: eno19795np0, gateway: 10.10.7.254, metric: 107 }
-             - { nic_name: eno19895np0, gateway: 10.10.8.254, metric: 108 }
-         node02:
-           nic_info:
-             - { nic_name: enp129s0f0np0, gateway: 10.11.1.254, metric: 101 }
-             - { nic_name: enp33s0f0np0, gateway: 10.11.2.254, metric: 102 }
+    #---------Template1---------
 
-inventory file for additional NIC configuration
-------------------------------------------------
+    [cluster1]
+    10.5.0.1
+    10.5.0.2
 
-::
-
-    [node-group1]
-    10.5.0.3
-
-    [node-group1:vars]
+    [cluster1:vars]
     Categories=group-1
 
-    [node-group2]
-    10.5.0.4
-    10.5.0.5
+    #---------Template2---------
 
-    [node-group2:vars]
-    Categories=group-2
+    [cluster2]
+    10.5.0.5 Categories=group-4
+    10.5.0.6 Categories=group-5
+
+    #---------Template3---------
+
+    10.5.0.3 Categories=group-2
+    10.5.0.4 Categories=group-3
+
 
 inventory file to delete node from the cluster
 -------------------------------------------------
