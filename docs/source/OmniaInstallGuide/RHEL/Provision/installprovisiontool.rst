@@ -39,10 +39,21 @@ To deploy the Omnia provision tool, ensure that ``input/provision_config.yml``, 
 
 .. note:: If the ``input/software_config.json`` has AMD ROCm and NVIDIA CUDA drivers mentioned, the AMD and NVIDIA accelerator drivers are installed on the nodes post provisioning.
 
-``discovery_provision.yml`` runs in three stages that can be called individually:
+.. caution:: If you intend to configure additional NICs during provisioning, ensure that you are aware of the network and NIC details of the cluster.
 
-.. caution:: Always execute ``discovery_provision.yml`` within the ``omnia`` directory. That is, always change directories (``cd omnia``) to the path where the playbook resides before running the playbook.
+**[Optional] Configure additional NICs and specify Kernel Parameters and on the nodes during cluster provisioning**
 
+To do this, you need to add the necessary inputs to the ``input/network_spec.yml`` and ``input/server_spec.yml`` and then run the ``discovery_provision.yml`` playbook with your created `inventory file <../../samplefiles.html#inventory-file-for-additional-nic-and-kernel-parameter-configuration>`_. For more information on what inputs are required, `click here <../AdvancedConfigurationsRHEL/AdditionalNIC_rhel.html>`_.
+After you've provided all the necessary inputs, provide the file path to the inventory file and execute the following command to invoke the playbook: ::
+
+    ansible-playbook discovery_provision.yml - i <inventory_filepath>
+
+Stages of the provision tool
+-----------------------------
+
+.. caution:: Always execute ``discovery_provision.yml`` within the ``omnia`` directory. Ensure to always change directories (using ``cd omnia`` command) to the path where the playbook resides before running the playbook.
+
+The provision tool, invoked by the ``discovery_provision.yml`` playbook, runs in three stages that can be called individually:
 
 **Stage 1: Preparing the control plane**
 

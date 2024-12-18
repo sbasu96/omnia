@@ -44,7 +44,7 @@ To deploy the Omnia provision tool, ensure that ``input/provision_config.yml``, 
 
 **[Optional] Configure additional NICs, assign IP rules, and specify Kernel Parameters and on the nodes during cluster provisioning**
 
-To do this, you need to add the necessary inputs to the ``input/network_spec.yml`` and ``input/server_spec.yml`` and then run the ``discovery_provision.yml`` playbook with your created `inventory file <../../samplefiles.html##inventory-file-for-additional-nic-configuration-and-Kernel-parameter-configuration>`_. For more information on what inputs are required, `click here <../../../Utils/AdditionalNIC.html>`_.
+To do this, you need to add the necessary inputs to the ``input/network_spec.yml`` and ``input/server_spec.yml`` and then run the ``discovery_provision.yml`` playbook with your created `inventory file <../../samplefiles.html#inventory-file-for-additional-nic-and-kernel-parameter-configuration>`_. For more information on what inputs are required, `click here <../AdvancedConfigurationsUbuntu/AdditionalNIC_ubuntu.html>`_.
 After you've provided all the necessary inputs, provide the file path to the inventory file and execute the following command to invoke the playbook: ::
 
     ansible-playbook discovery_provision.yml - i <inventory_filepath>
@@ -52,7 +52,7 @@ After you've provided all the necessary inputs, provide the file path to the inv
 Stages of the provision tool
 -----------------------------
 
-.. caution:: Always execute ``discovery_provision.yml`` within the ``omnia`` directory. That is, always change directories (using ``cd omnia``) to the path where the playbook resides before running the playbook.
+.. caution:: Always execute ``discovery_provision.yml`` within the ``omnia`` directory. Ensure to always change directories (using ``cd omnia`` command) to the path where the playbook resides before running the playbook.
 
 The provision tool, invoked by the ``discovery_provision.yml`` playbook, runs in three stages that can be called individually:
 
