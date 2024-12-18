@@ -3,112 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flowchart</title>
+    <title>Omnia Deployment Flowchart</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f9;
+        *,
+        *:before,
+        *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
         }
-        .flowchart-container {
+
+        * {
             position: relative;
-            width: 400px;
+            margin: 0;
+            padding: 0;
+            border: 0 none;
+            -webkit-transition: all ease .4s;
+            -moz-transition: all ease .4s;
+            transition: all ease .4s;
         }
-        .box {
-            width: 200px;
-            height: 50px;
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            background: RGBA(0, 58, 97, 1);
+            font-family: 'Fjalla One', sans-serif;
+            font-size: 18px;
+        }
+
+        h1 {
+            padding-top: 40px;
+            color: #ccc;
             text-align: center;
-            line-height: 50px;
-            margin: 20px auto;
-            border: 2px solid black;
-            border-radius: 5px;
-            font-weight: bold;
+            font-size: 1.8rem;
+            text-shadow: rgba(0,0,0,0.6) 1px 0, rgba(0,0,0,0.6) 1px 0, rgba(0,0,0,0.6) 0 1px, rgba(0,0,0,0.6) 0 1px;
         }
-        .parallelogram {
-            width: 200px;
-            height: 100px;
+
+        .nav {
+            margin: 20px auto;
+            width: 455px;
+            min-height: auto;
+        }
+
+        .nav ul {
+            position: relative;
+            padding-top: 20px;
+        }
+
+        .nav li {
+            position: relative;
+            padding: 20px 3px 0 3px;
+            float: left;
             text-align: center;
-            line-height: 20px;
-            margin: 20px auto;
-            background-color: #ffeb3b;
-            border: 2px solid black;
-            transform: skew(-20deg);
-            padding: 10px;
-            font-weight: bold;
-        }
-        .start {
-            background-color: red;
-            color: white;
-        }
-        .prepare-oim {
-            background-color: blue;
-            color: white;
-        }
-        .prereq-sh {
-            background-color: green;
-            color: white;
-        }
-        .local-repo {
-            background-color: blue;
-            color: white;
-        }
-        .link {
-            color: white;
-            text-decoration: none;
-        }
-        .arrow {
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-top: 20px solid black;
-            margin: 10px auto;
-        }
-        .parallelogram ul {
             list-style-type: none;
-            padding-left: 0;
         }
-        .parallelogram li {
-            padding: 5px 0;
+
+        .nav li::before, .nav li::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 50%;
+            width: 50%;
+            height: 20px;
+            border-top: 1px solid #ccc;
         }
+
+        .nav li::after {
+            left: 50%;
+            right: auto;
+            border-left: 1px solid #ccc;
+        }
+
+        .nav li:only-child::after, .nav li:only-child::before {
+            content: '';
+            display: none;
+        }
+
+        .nav li:only-child {
+            padding-top: 0;
+        }
+
+        .nav li:first-child::before, .nav li:last-child::after {
+            border: 0 none;
+        }
+
+        .nav li:last-child::before {
+            border-right: 1px solid #ccc;
+            border-radius: 0 5px 0 0;
+        }
+
+        .nav li:first-child::after {
+            border-radius: 5px 0 0 0;
+        }
+
+        .nav ul ul::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            border-left: 1px solid #ccc;
+            width: 0;
+            height: 20px;
+        }
+
+        .nav li a {
+            display: inline-block;
+            padding: 10px 20px; /* Increased padding for better visibility */
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: #ccc;
+            font-family: arial, verdana, tahoma;
+            font-size: 13px; /* Increased font size */
+            background-color: blue; /* Background color for the menu item */
+        }
+
+        /* Add hover effect for all menu items */
+        .nav li a:hover, .nav li a:hover+ul li a {
+            color: #000;
+            background: #c8e4f8;
+            border: 1px solid #94a0b4;
+        }
+
+        .nav li a:hover+ul li::after,
+        .nav li a:hover+ul li::before,
+        .nav li a:hover+ul::before,
+        .nav li a:hover+ul ul::before {
+            content: '';
+            border-color: #94a0b4;
+        }
+
     </style>
 </head>
 <body>
-<div class="flowchart-container">
-    <!-- Start Box -->
-    <div class="box start">Start</div>
-    <div class="arrow"></div>
 
-    <!-- Prepare OIM Box -->
-    <div class="box prepare-oim">
-        <a href="https://omniahpc.readthedocs.io/en/release_1.7/OmniaInstallGuide/Ubuntu/Ubuntu_prereq.html" class="link" target="_blank">Prepare OIM</a>
-    </div>
-    <div class="arrow"></div>
+<h1>Omnia Deployment Flowchart</h1>
+<nav class="nav">
+    <ul>
+        <li>
+            <a style="background-color: red; font-family: Arial, sans-serif;" href="#">Start</a> <!-- "Start" as the parent menu item -->
+            <ul>
+                <li>
+                    <a href="#">Prepare OIM</a> <!-- "Prepare OIM" as the second item under "Start" -->
+                    <ul>
+                        <li>
+                            <a href="#">Prereq.sh</a> <!-- "Prereq.sh" as the third item -->
+                            <ul>
+                                <li>
+                                    <a href="#">Local Repositories</a> <!-- "Local Repositories" as a decision node -->
+                                    <ul>
+                                        <li>
+                                            <a href="#">Provision Cluster</a> <!-- "Local Repositories" as a decision node -->
+                                            <ul>
+                                                <li>
+                                                    <a href="#">Create Node Inventory</a> <!-- "Local Repositories" as a decision node -->
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">Slurm(HPC)</a>
+                                                            <ul>
+                                                                <li>
+                                                                    <a href="#">Configure cluster</a>
+                                                                    <ul>
+                                                                        <li>
+                                                                            <a href="#">Execute omnia.yml</a>
+                                                                            <ul>
+                                                                                <li>
+                                                                                    <a href="https://www.google.com" target="_blank">Run HPC jobs</a>
+                                                                                </li>
+                                                                            </ul>
 
-    <!-- Prereq.sh Box -->
-    <div class="box prereq-sh">
-        <a href="https://omniahpc.readthedocs.io/en/release_1.7/OmniaInstallGuide/Ubuntu/Prereq.sh/index.html" class="link" target="_blank">Prereq.sh</a>
-    </div>
-    <div class="arrow"></div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Kubernetes(AI)</a>
+                                                            <ul>
+                                                                <li>
+                                                                    <a href="#">Configure cluster</a>
+                                                                    <ul>
+                                                                        <li>
+                                                                            <a href="#">Execute omnia.yml</a>
+                                                                            <ul>
+                                                                                <li>
+                                                                                    <a href="#">Run AI jobs</a> <!-- "Local Repositories" as a decision node -->
+                                                                                </li>
+                                                                            </ul>
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
 
-    <!-- Local Repository Box -->
-    <div class="box local-repo">
-        <a href="https://omniahpc.readthedocs.io/en/release_1.7/OmniaInstallGuide/Ubuntu/CreateLocalRepo/index.html" class="link" target="_blank">Local Repository</a>
-    </div>
-    <div class="arrow"></div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
 
-    <!-- Parallelogram Box -->
-    <div class="parallelogram">
-        <ul>
-            <li>a. Fulfill the prereqs</li>
-            <li>b. Provide input and configure local repositories</li>
-            <li>c. Execute <code>local_repo.yml</code> playbook</li>
-        </ul>
-    </div>
-</div>
 </body>
 </html>
