@@ -39,7 +39,10 @@ To deploy the Omnia provision tool, ensure that ``input/provision_config.yml``, 
 
 .. note:: If the ``input/software_config.json`` has AMD ROCm and NVIDIA CUDA drivers mentioned, the AMD and NVIDIA accelerator drivers are installed on the nodes post provisioning.
 
-.. caution:: If you intend to configure additional NICs during provisioning, ensure that you are aware of the network and NIC details of the cluster.
+.. caution::
+
+    * If you intend to configure additional NICs during provisioning, ensure that you are aware of the network and NIC details of the cluster.
+    * Assigning IP rules to additional NICs is not supported on RHEL or Rocky clusters.
 
 **[Optional] Configure additional NICs and specify Kernel Parameters and on the nodes during cluster provisioning**
 
