@@ -8,6 +8,7 @@ Building an Omnia Cluster
     Authentication
     Storage/index
     install_kubernetes
+    install_slurm
     installscheduler
 
 

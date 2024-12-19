@@ -15,3 +15,5 @@ Advanced configurations for Ubuntu clusters
     ROCm_accelerator
     Habana_accelerator
     PowerScale_CSI
+    AutomatingOneAPI
+    AutomatingOpenMPI

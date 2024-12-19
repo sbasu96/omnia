@@ -26,6 +26,21 @@ This topic explains how to automatically update AMD servers for MPI jobs.
     cd benchmarks
     ansible-playbook amd_benchmark.yml -i inventory
 
+**To execute single node jobs**
+
+To execute a single node job, use the following script: ::
+
+    #!/bin/bash
+    #SBATCH --job-name=testAMD
+    #SBATCH --output=/home/testAMD%j.log
+    #SBATCH --partition=normal
+    #SBATCH --nodelist=node001.omnia.test
+    #SBATCH --time=10:00
+    #SBATCH --ntasks=1
+
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/benchmarks/openmpi-4.1.6/openmpi/lib
+    srun --mpi=pmi2 /home/amd-zen-hpl-2024_10_08/xhpl
+
 **To execute multi-node jobs**
 
 * OpenMPI and aocc-compiler-*.tar should be installed and compiled with slurm on all cluster nodes or should be available on the NFS share.
@@ -36,8 +51,6 @@ This topic explains how to automatically update AMD servers for MPI jobs.
     * While compiling OpenMPI, include ``pmix``, ``slurm``, ``hwloc`` and, ``libevent`` as shown in the below sample command: ::
 
                 ./configure --prefix=/home/omnia-share/openmpi-4.1.5 --enable-mpi1-compatibility --enable-orterun-prefix-by-default --with-slurm=/usr --with-pmix=/usr --with-libevent=/usr --with-hwloc=/usr --with-ucx CC=clang CXX=clang++ FC=flang   2>&1 | tee config.out
-
-
 
 * For a job to run on multiple nodes (10.5.0.4 and 10.5.0.5) where OpenMPI is compiled and installed on the NFS share (``/home/omnia-share/openmpi/bin/mpirun``), the job can be initiated as below:
 
@@ -106,5 +119,5 @@ Alternatively, to use ``mpirun``, the script would be: ::
 
 
 
-.. note:: The above scripts are samples that can be modified as required. Ensure that ``--mca orte_keep_fqdn_hostnames 1`` is included in the mpirun command in sbatch scripts.  Omnia maintains all hostnames in FQDN format. Failing to include ``--mca orte_keep_fqdn_hostnames 1`` may cause job initiation to fail.
+.. note:: The above scripts are samples that can be modified as required. Ensure that ``--mca orte_keep_fqdn_hostnames 1`` is included in the mpirun command in sbatch scripts. Omnia maintains all hostnames in FQDN format. Failing to include ``--mca orte_keep_fqdn_hostnames 1`` may cause job initiation to fail.
 
