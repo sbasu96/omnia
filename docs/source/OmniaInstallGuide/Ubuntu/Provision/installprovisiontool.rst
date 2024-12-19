@@ -47,7 +47,7 @@ To deploy the Omnia provision tool, ensure that ``input/provision_config.yml``, 
 To do this, you need to add the necessary inputs to the ``input/network_spec.yml`` and ``input/server_spec.yml`` and then run the ``discovery_provision.yml`` playbook with your created `inventory file <../../samplefiles.html#inventory-file-for-additional-nic-and-kernel-parameter-configuration>`_. For more information on what inputs are required, `click here <../AdvancedConfigurationsUbuntu/AdditionalNIC_ubuntu.html>`_.
 After you've provided all the necessary inputs, provide the file path to the inventory file and execute the following command to invoke the playbook: ::
 
-    ansible-playbook discovery_provision.yml - i <inventory_filepath>
+    ansible-playbook discovery_provision.yml -i <inventory_filepath>
 
 Stages of the provision tool
 -----------------------------
