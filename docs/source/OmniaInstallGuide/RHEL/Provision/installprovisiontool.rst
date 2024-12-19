@@ -43,6 +43,7 @@ To deploy the Omnia provision tool, ensure that ``input/provision_config.yml``, 
 
     * If you intend to configure additional NICs during provisioning, ensure that you are aware of the network and NIC details of the cluster.
     * Assigning IP rules to additional NICs is not supported on RHEL or Rocky clusters.
+    * You can only use the below [optional] functionality on new nodes (during first provisioning). Nodes which have already been provisioned and are in booted state can't be modified with a re-run of ``discovery_provision.yml`` playbook.
 
 **[Optional] Configure additional NICs and specify Kernel Parameters on the nodes during cluster provisioning**
 

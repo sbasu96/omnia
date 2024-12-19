@@ -40,7 +40,10 @@ To deploy the Omnia provision tool, ensure that ``input/provision_config.yml``, 
     * If the ``input/software_config.json`` has AMD ROCm, Intel Gaudi, and NVIDIA CUDA drivers mentioned, the AMD, Intel, and NVIDIA accelerator drivers are installed on the nodes post provisioning.
     * Omnia recommends to install the Intel Gaudi driver post provisioning using the ``accelerator.yml`` playbook in case the node has internet connectivity during provisioning. For more information, `click here <../AdvancedConfigurationsUbuntu/Habana_accelerator.html>`_.
 
-.. caution:: If you intend to configure additional NICs during provisioning, ensure that you are aware of the network and NIC details of the cluster.
+.. caution::
+
+    * If you intend to configure additional NICs during provisioning, ensure that you are aware of the network and NIC details of the cluster.
+    * You can only use the below [optional] functionality on new nodes (during first provisioning). Nodes which have already been provisioned and are in booted state can't be modified with a re-run of ``discovery_provision.yml`` playbook.
 
 **[Optional] Configure additional NICs, assign IP rules, and specify Kernel Parameters on the nodes during cluster provisioning**
 
