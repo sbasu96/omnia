@@ -54,9 +54,9 @@ The ``server_spec_update.yml`` playbook can be used to do the following tasks:
 
 **Usage Instructions**
 
-* *Configure additional NICs.*
+* *To configure additional NICs, do the following:*
 
-    * Fill up all the necessary details for the additional NICs in the ``input/network_spec.yml`` file. You can refer the following sample: ::
+    1. Fill up all the necessary details for the additional NICs in the ``input/network_spec.yml`` file. You can refer the following sample: ::
 
         - nic_network1:
            netmask_bits: "24"
@@ -71,7 +71,7 @@ The ``server_spec_update.yml`` playbook can be used to do the following tasks:
            MTU: "1500"
            VLAN: "1"
 
-    * Add the additional NIC information to the ``input/server_spec.yml`` file. You can refer the following sample: ::
+    2. Add the additional NIC information to the ``input/server_spec.yml`` file. You can refer the following sample: ::
 
         Categories:
           - category-1:
@@ -85,11 +85,11 @@ The ``server_spec_update.yml`` playbook can be used to do the following tasks:
                       nicdevices: "ensp0"
 
 
-* *Configure OS Kernel command-line parameters on the nodes.*
+* *To configure OS Kernel command-line parameters on the nodes, do the following:*
 
-    * Do not change anything in the ``input/network_spec.yml`` file.
+    1. Do not change anything in the ``input/network_spec.yml`` file.
 
-    * Add the OS Kernel command-line parameters to the ``cmdline`` field in the ``input/server_spec.yml`` file. You can refer the following sample: ::
+    2. Add the OS Kernel command-line parameters to the ``cmdline`` field in the ``input/server_spec.yml`` file. You can refer the following sample: ::
 
         Categories:
            - category-1:
@@ -99,9 +99,9 @@ The ``server_spec_update.yml`` playbook can be used to do the following tasks:
 
 
 
-* *Configure additional NICs and specify OS Kernel command-line parameters on the nodes.*
+* *To configure additional NICs and specify OS Kernel command-line parameters on the nodes, do the following:*
 
-    * Fill up all the necessary details for the additional NICs in the ``input/network_spec.yml`` file. You can refer the following sample: ::
+    1. Fill up all the necessary details for the additional NICs in the ``input/network_spec.yml`` file. You can refer the following sample: ::
 
         - nic_network1:
            netmask_bits: "24"
@@ -116,7 +116,7 @@ The ``server_spec_update.yml`` playbook can be used to do the following tasks:
            MTU: "1500"
            VLAN: "1"
 
-    * Add the OS Kernel command-line parameters to the ``cmdline`` field in the ``input/server_spec.yml`` file. You can refer the following sample: ::
+    2. Add the OS Kernel command-line parameters to the ``cmdline`` field in the ``input/server_spec.yml`` file. You can refer the following sample: ::
 
         Categories:
           - category-1:

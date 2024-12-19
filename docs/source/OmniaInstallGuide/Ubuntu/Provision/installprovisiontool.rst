@@ -42,7 +42,7 @@ To deploy the Omnia provision tool, ensure that ``input/provision_config.yml``, 
 
 .. caution:: If you intend to configure additional NICs during provisioning, ensure that you are aware of the network and NIC details of the cluster.
 
-**[Optional] Configure additional NICs, assign IP rules, and specify Kernel Parameters and on the nodes during cluster provisioning**
+**[Optional] Configure additional NICs, assign IP rules, and specify Kernel Parameters on the nodes during cluster provisioning**
 
 To do this, you need to add the necessary inputs to the ``input/network_spec.yml`` and ``input/server_spec.yml`` and then run the ``discovery_provision.yml`` playbook with your created `inventory file <../../samplefiles.html#inventory-file-for-additional-nic-and-kernel-parameter-configuration>`_. For more information on what inputs are required, `click here <../AdvancedConfigurationsUbuntu/AdditionalNIC_ubuntu.html>`_.
 After you've provided all the necessary inputs, provide the file path to the inventory file and execute the following command to invoke the playbook: ::
