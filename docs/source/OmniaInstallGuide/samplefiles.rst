@@ -180,7 +180,7 @@ software_config.json for RHEL/Rocky Linux
 inventory file for additional NIC and Kernel parameter configuration
 -------------------------------------------------------------------------
 
-.. note:: You can use either or combine node IP, service tags, or hostname in the below inventory file.
+.. note:: You can use either a node IP, service tags, or hostname, or any combination of them in the inventory file below.
 
 Choose fom any of the templates provided below:
 
