@@ -193,18 +193,18 @@ Choose fom any of the templates provided below:
     10.5.0.2
 
     [cluster1:vars]
-    Categories=group-1
+    Categories=category-1
 
     #---------Template2---------
 
     [cluster2]
-    10.5.0.5 Categories=group-4
-    10.5.0.6 Categories=group-5
+    10.5.0.5 Categories=category-4
+    10.5.0.6 Categories=category-5
 
     #---------Template3---------
 
-    10.5.0.3 Categories=group-2
-    10.5.0.4 Categories=group-3
+    10.5.0.3 Categories=category-2
+    10.5.0.4 Categories=category-3
 
 
 inventory file to delete node from the cluster

@@ -57,35 +57,35 @@ The ``server_spec_update.yml`` playbook can be used to do the following tasks:
 
 .. note:: If you don't want to assign an IP rule to the additional NICs, do not enter any values for ``metric`` or ``network_gateway``.
 
-    * Fill up all the necessary details for the additional NICs in the ``input/network_spec.yml`` file. You can refer the following sample: ::
+* Fill up all the necessary details for the additional NICs in the ``input/network_spec.yml`` file. You can refer the following sample: ::
 
-        - nic_network1:
-           netmask_bits: "24"
-           CIDR: "10.23.1.0"
-           network_gateway: "10.23.1.0"
-           MTU: "1500"
-           VLAN: ""
-        - nic_network2:
-           netmask_bits: "24"
-           static_range: "10.23.2.1-10.23.2.254"
-           network_gateway: "10.23.2.0"
-           MTU: "1500"
-           VLAN: "1"
+    - nic_network1:
+       netmask_bits: "24"
+       CIDR: "10.23.1.0"
+       network_gateway: "10.23.1.0"
+       MTU: "1500"
+       VLAN: ""
+    - nic_network2:
+       netmask_bits: "24"
+       static_range: "10.23.2.1-10.23.2.254"
+       network_gateway: "10.23.2.0"
+       MTU: "1500"
+       VLAN: "1"
 
-    * Add the additional NIC information to the ``input/server_spec.yml`` file. You can refer the following sample: ::
+* Add the additional NIC information to the ``input/server_spec.yml`` file. You can refer the following sample: ::
 
-        Categories:
-          - group-1:
-              - network:
-                  - ensp0:
-                      nicnetwork: "nic_network1"
-                      nictypes: "ethernet"
-                      metric: 100
-                  - ensp0.5:
-                      nicnetwork: "nic_network2"
-                      nictypes: "vlan"
-                      nicdevices: "ensp0"
-                      metric: 100
+    Categories:
+      - category-1:
+          - network:
+              - ensp0:
+                  nicnetwork: "nic_network1"
+                  nictypes: "ethernet"
+                  metric: 100
+              - ensp0.5:
+                  nicnetwork: "nic_network2"
+                  nictypes: "vlan"
+                  nicdevices: "ensp0"
+                  metric: 100
 
 
 * *Configure OS Kernel command-line parameters on the nodes.*
@@ -95,7 +95,7 @@ The ``server_spec_update.yml`` playbook can be used to do the following tasks:
     * Add the OS Kernel command-line parameters to the ``cmdline`` field in the ``input/server_spec.yml`` file. You can refer the following sample: ::
 
         Categories:
-           - group-1:
+           - category-1:
                - os:
                    - kernel:
                        - cmdline: "iommu=pt intel_iommu=off pci=realloc=off processor.max_cstate=0 intel_idle.max_cstate=0 intel_pstate=disable"
@@ -106,38 +106,38 @@ The ``server_spec_update.yml`` playbook can be used to do the following tasks:
 
 .. note:: If you don't want to assign an IP rule to the additional NICs, do not enter any values for ``metric`` or ``network_gateway``.
 
-    * Fill up all the necessary details for the additional NICs in the ``input/network_spec.yml`` file. You can refer the following sample: ::
+* Fill up all the necessary details for the additional NICs in the ``input/network_spec.yml`` file. You can refer the following sample: ::
 
-        - nic_network1:
-           netmask_bits: "24"
-           CIDR: "10.23.1.0"
-           network_gateway: "10.23.1.0"
-           MTU: "1500"
-           VLAN: ""
-        - nic_network2:
-           netmask_bits: "24"
-           static_range: "10.23.2.1-10.23.2.254"
-           network_gateway: "10.23.2.0"
-           MTU: "1500"
-           VLAN: "1"
+    - nic_network1:
+       netmask_bits: "24"
+       CIDR: "10.23.1.0"
+       network_gateway: "10.23.1.0"
+       MTU: "1500"
+       VLAN: ""
+    - nic_network2:
+       netmask_bits: "24"
+       static_range: "10.23.2.1-10.23.2.254"
+       network_gateway: "10.23.2.0"
+       MTU: "1500"
+       VLAN: "1"
 
-    * Add the OS Kernel command-line parameters to the ``cmdline`` field in the ``input/server_spec.yml`` file. You can refer the following sample: ::
+* Add the OS Kernel command-line parameters to the ``cmdline`` field in the ``input/server_spec.yml`` file. You can refer the following sample: ::
 
-        Categories:
-          - group-1:
-              - network:
-                  - ensp0:
-                      nicnetwork: "nic_network1"
-                      nictypes: "ethernet"
-                      metric: 100
-                  - ensp0.5:
-                      nicnetwork: "nic_network2"
-                      nictypes: "vlan"
-                      nicdevices: "ensp0"
-                      metric: 100
-              - os:
-                  - kernel:
-                      - cmdline: "iommu=pt intel_iommu=off pci=realloc=off processor.max_cstate=0 intel_idle.max_cstate=0 intel_pstate=disable"
+    Categories:
+      - category-1:
+          - network:
+              - ensp0:
+                  nicnetwork: "nic_network1"
+                  nictypes: "ethernet"
+                  metric: 100
+              - ensp0.5:
+                  nicnetwork: "nic_network2"
+                  nictypes: "vlan"
+                  nicdevices: "ensp0"
+                  metric: 100
+          - os:
+              - kernel:
+                  - cmdline: "iommu=pt intel_iommu=off pci=realloc=off processor.max_cstate=0 intel_idle.max_cstate=0 intel_pstate=disable"
 
 .. note::
 
@@ -169,16 +169,16 @@ After you have filled up the ``input/network_spec.yml`` and ``input/server_spec.
     10.5.0.1
     10.5.0.2
     [cluster1:vars]
-    Categories=group-1
+    Categories=category-1
 
     #---------Template2---------
     [cluster2]
-    10.5.0.5 Categories=group-4
-    10.5.0.6 Categories=group-5
+    10.5.0.5 Categories=category-4
+    10.5.0.6 Categories=category-5
 
     #---------Template3---------
-    10.5.0.3 Categories=group-2
-    10.5.0.4 Categories=group-3
+    10.5.0.3 Categories=category-2
+    10.5.0.4 Categories=category-3
 
 In the above sample inventory file, ``[cluster1]`` and ``[cluster2]`` are user-defined groups with servers associated to them. The group ``[cluster1]`` is mapped and categorised under ``[<group name>:vars]``. Nodes in the ``[cluster2]`` group or any ungrouped nodes are directly mapped to their respective ``Categories``.
 
@@ -191,7 +191,7 @@ In the above sample inventory file, ``[cluster1]`` and ``[cluster2]`` are user-d
 
 .. caution:: Omnia does not support modifying the category definitions (for example, ``nic_name``, ``nicnetwork``, or ``nictype``) in ``input/server_spec.yml`` or changing the category details in the inventory file provided, during consecutive runs of the ``server_spec_update.yml`` playbook.
 
-Based on the provided sample files, server 10.5.0.1 has been mapped to ``[cluster1]`` which corresponds to group-1. Therefore, the NICs ensp0 and ensp0.5 will be configured in an ethernet VLAN group with ensp0 as the primary device.
+Based on the provided sample files, server 10.5.0.1 has been mapped to ``[cluster1]`` which corresponds to **category-1**. Therefore, the NICs ensp0 and ensp0.5 will be configured in an ethernet VLAN group with ensp0 as the primary device.
 
 
 
