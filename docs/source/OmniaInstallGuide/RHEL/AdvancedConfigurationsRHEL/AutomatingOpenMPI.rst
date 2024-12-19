@@ -26,6 +26,21 @@ This topic explains how to automatically update AMD servers for MPI jobs.
     cd benchmarks
     ansible-playbook amd_benchmark.yml -i inventory
 
+**To execute single node jobs**
+
+To execute a single node job, use the following script: ::
+
+    #!/bin/bash
+    #SBATCH --job-name=testAMD
+    #SBATCH --output=/home/testAMD%j.log
+    #SBATCH --partition=normal
+    #SBATCH --nodelist=node001.omnia.test
+    #SBATCH --time=10:00
+    #SBATCH --ntasks=1
+
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/benchmarks/openmpi-4.1.6/openmpi/lib
+    srun --mpi=pmi2 /home/amd-zen-hpl-2024_10_08/xhpl
+
 **To execute multi-node jobs**
 
 * OpenMPI and aocc-compiler-*.tar should be installed and compiled with slurm on all cluster nodes or should be available on the NFS share.
