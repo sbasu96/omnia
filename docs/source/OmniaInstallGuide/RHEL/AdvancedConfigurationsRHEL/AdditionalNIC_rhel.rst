@@ -3,10 +3,10 @@ Configure additional NICs and specify Kernel Parameters on the nodes
 
 .. caution:: Assigning IP rules to additional NICs is not supported on RHEL or Rocky clusters.
 
-Omnia provides two ways of configuring additional NICs and defining Kernel command-line parameters on the nodes:
+Omnia provides two methods for configuring additional NICs and defining Kernel command-line parameters on the nodes:
 
-1. You can choose to do these during cluster provisioning itself. To do this, you need to add the necessary inputs to the ``input/network_spec.yml`` and ``input/server_spec.yml`` and then run the ``discovery_provision.yml`` playbook. To know more about configuring them during provisioning, `click here <../OmniaInstallGuide/Ubuntu/Provision/installprovisiontool.html#running-the-provision-tool>`_.
-2. Or you can run the ``server_spec_update.yml`` playbook separately after the ``discovery_provision.yml`` playbook has been executed and the nodes have booted up. To do so, you need to add the necessary inputs to the ``input/network_spec.yml`` and ``input/server_spec.yml`` and then run the ``server_spec_update.yml`` playbook.
+1. You can run the ``server_spec_update.yml`` playbook separately after the ``discovery_provision.yml`` playbook has been executed and the nodes have booted up. In this case, you need to add the necessary inputs to the ``input/network_spec.yml`` and ``input/server_spec.yml`` and then run the ``server_spec_update.yml`` playbook.
+2. [Optional] Alternatively, you can configure these settings during the cluster provisioning process itself. To do so, add the necessary inputs to the ``input/network_spec.yml`` and ``input/server_spec.yml`` files, and then run the ``discovery_provision.yml`` playbook. For more details on configuring these during provisioning, `click here <../OmniaInstallGuide/RHEL/Provision/installprovisiontool.html#running-the-provision-tool>`_.
 
 .. note:: To know more about the supported kernel command-line parameters, `click here <https://docs.kernel.org/admin-guide/kernel-parameters.html>`_.
 
