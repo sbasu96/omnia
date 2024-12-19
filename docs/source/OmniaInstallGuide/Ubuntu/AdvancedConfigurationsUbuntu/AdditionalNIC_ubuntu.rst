@@ -53,39 +53,39 @@ The ``server_spec_update.yml`` playbook can be used to do the following tasks:
 
 **Usage Instructions**
 
-* *Configure additional NICs and assign IP rules to those NICs.*
+* *To Configure additional NICs and assign IP rules to those NICs, do the following:*
 
-.. note:: If you don't want to assign an IP rule to the additional NICs, do not enter any values for ``metric`` or ``network_gateway``.
+            .. note:: If you don't want to assign an IP rule to the additional NICs, do not enter any values for ``metric`` or ``network_gateway``.
 
-* Fill up all the necessary details for the additional NICs in the ``input/network_spec.yml`` file. You can refer the following sample: ::
+    1. Fill up all the necessary details for the additional NICs in the ``input/network_spec.yml`` file. You can refer the following sample: ::
 
-    - nic_network1:
-       netmask_bits: "24"
-       CIDR: "10.23.1.0"
-       network_gateway: "10.23.1.0"
-       MTU: "1500"
-       VLAN: ""
-    - nic_network2:
-       netmask_bits: "24"
-       static_range: "10.23.2.1-10.23.2.254"
-       network_gateway: "10.23.2.0"
-       MTU: "1500"
-       VLAN: "1"
+        - nic_network1:
+           netmask_bits: "24"
+           CIDR: "10.23.1.0"
+           network_gateway: "10.23.1.0"
+           MTU: "1500"
+           VLAN: ""
+        - nic_network2:
+           netmask_bits: "24"
+           static_range: "10.23.2.1-10.23.2.254"
+           network_gateway: "10.23.2.0"
+           MTU: "1500"
+           VLAN: "1"
 
-* Add the additional NIC information to the ``input/server_spec.yml`` file. You can refer the following sample: ::
+    * Add the additional NIC information to the ``input/server_spec.yml`` file. You can refer the following sample: ::
 
-    Categories:
-      - category-1:
-          - network:
-              - ensp0:
-                  nicnetwork: "nic_network1"
-                  nictypes: "ethernet"
-                  metric: 100
-              - ensp0.5:
-                  nicnetwork: "nic_network2"
-                  nictypes: "vlan"
-                  nicdevices: "ensp0"
-                  metric: 100
+        Categories:
+          - category-1:
+              - network:
+                  - ensp0:
+                      nicnetwork: "nic_network1"
+                      nictypes: "ethernet"
+                      metric: 100
+                  - ensp0.5:
+                      nicnetwork: "nic_network2"
+                      nictypes: "vlan"
+                      nicdevices: "ensp0"
+                      metric: 100
 
 
 * *Configure OS Kernel command-line parameters on the nodes.*
