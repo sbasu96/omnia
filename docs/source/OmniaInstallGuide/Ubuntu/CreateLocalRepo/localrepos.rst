@@ -164,6 +164,8 @@ Configure specific local repositories
 
     For information on deploying BeeGFS after setting up the cluster, `click here <../OmniaCluster/BuildingCluster/Storage/BeeGFS.html>`_.
 
+    .. note:: For clusters running on Ubuntu 24.04 OS, the supported BeeGFS version is ``7.4.5``.
+
 **NFS**
 
     To install NFS, include the following line under ``softwares`` in ``input/software_config.json``: ::
