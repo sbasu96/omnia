@@ -5,217 +5,215 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Omnia Deployment Flowchart</title>
     <style>
-        *,
-        *:before,
-        *:after {
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-
-        * {
-            position: relative;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white; /* Dark blue background */
+            color: #ccc;
             margin: 0;
-            padding: 0;
-            border: 0 none;
-            -webkit-transition: all ease .4s;
-            -moz-transition: all ease .4s;
-            transition: all ease .4s;
+            padding: 20px;
         }
 
-        html,
-            body {
-                width: 100%;
-                height: 100%;
-                background: RGBA(0, 58, 97, 1);
-                font-family: 'Fjalla One', sans-serif;
-                font-size: 18px;
-            }
+        h1 {
+            text-align: center;
+            color: black;
+            font-size: 1.8rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+            margin-bottom: 20px;
+        }
 
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            padding: 0 10px; /* Padding for smaller screens */
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .node {
+            text-align: center;
+            padding: 10px 15px;
+            margin: 2px 0;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: #fff;
+            font-size: 1rem; /* Use relative font size */
+            border: 1px solid #ccc;
+            width: fit-content;
+            max-width: 90%; /* Prevent overflow on smaller screens */
+            word-wrap: break-word; /* Handle long text gracefully */
+        }
+
+        .node:hover {
+            background-color: #c8e4f8;
+            color: #000;
+        }
+
+        .connector {
+            width: 2px;
+            height: 30px;
+            background-color: #ccc;
+        }
+
+        .branch {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 10px;
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            gap: 20px; /* Add spacing between columns */
+        }
+
+        /* Horizontal line between the branches */
+        .branch::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: calc(25% - 20px); /* Start from the left connector */
+            width: calc(50% + 40px); /* Dynamic width for branch line */
+            height: 2px;
+            background-color: #ccc;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 45%; /* Equal width for columns */
+            position: relative;
+            margin-top: 20px; /* Space between horizontal line and columns */
+        }
+
+        .column::before {
+            content: '';
+            position: absolute;
+            top: -30px; /* Connects to the horizontal line */
+            left: 50%;
+            width: 2px;
+            height: 30px; /* Extend to touch horizontal branch */
+            background-color: #ccc;
+            transform: translateX(-50%);
+        }
+
+        .node a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .node a:hover {
+            color: #000;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
             h1 {
-                padding-top: 40px;
-                color: #ccc;
-                text-align: center;
-                font-size: 1.8rem;
-                text-shadow: rgba(0,0,0,0.6) 1px 0, rgba(0,0,0,0.6) 1px 0, rgba(0,0,0,0.6) 0 1px, rgba(0,0,0,0.6) 0 1px;
+                font-size: 1.5rem; /* Adjust heading size */
             }
 
-            .nav {
-                margin: 20px auto;
-                width: 455px;
-                min-height: auto;
-                align;
+            .node {
+                font-size: 0.9rem; /* Reduce font size */
+                padding: 8px 12px; /* Adjust padding */
             }
 
-            .nav ul {
-                position: relative;
-                padding-top: 20px;
+            .branch {
+                flex-direction: column; /* Stack columns vertically on smaller screens */
+                gap: 0; /* Remove spacing between stacked columns */
             }
 
-            .nav li {
-                position: relative;
-                padding: 20px 3px 0 3px;
-                float: left;
-                text-align: center;
-                list-style-type: none;
+            .column {
+                width: 100%; /* Make columns take full width */
+                margin-top: 15px; /* Adjust spacing for stacked layout */
             }
 
-            .nav li::before, .nav li::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                right: 50%;
-                width: 50%;
-                height: 20px;
-                border-top: 1px solid #ccc;
+            .branch::before {
+                width: 0; /* Remove the horizontal line for stacked layout */
             }
 
-            .nav li::after {
-                left: 50%;
-                right: auto;
-                border-left: 1px solid #ccc;
-            }
-
-            .nav li:only-child::after, .nav li:only-child::before {
-                content: '';
-                display: none;
-            }
-
-            .nav li:only-child {
-                padding-top: 0;
-            }
-
-            .nav li:first-child::before, .nav li:last-child::after {
-                border: 0 none;
-            }
-
-            .nav li:last-child::before {
-                border-right: 1px solid #ccc;
-                border-radius: 0 5px 0 0;
-            }
-
-            .nav li:first-child::after {
-                border-radius: 5px 0 0 0;
-            }
-
-            .nav ul ul::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 50%;
-                border-left: 1px solid #ccc;
-                width: 0;
-                height: 20px;
-            }
-
-            .nav li a {
-                display: inline-block;
-                padding: 10px 20px; /* Increased padding for better visibility */
-                border-radius: 5px;
-                border: 1px solid #ccc;
-                text-decoration: none;
-                text-transform: uppercase;
-                color: #ccc;
-                font-family: arial, verdana, tahoma;
-                font-size: 13px; /* Increased font size */
-                background-color: blue; /* Background color for the menu item */
-            }
-
-            /* Add hover effect for all menu items */
-            .nav li a:hover, .nav li a:hover+ul li a {
-                color: #000;
-                background: #c8e4f8;
-                border: 1px solid #94a0b4;
-            }
-
-            .nav li a:hover+ul li::after,
-            .nav li a:hover+ul li::before,
-            .nav li a:hover+ul::before,
-            .nav li a:hover+ul ul::before {
-                content: '';
-                border-color: #94a0b4;
+            .column::before {
+                top: 0; /* Remove vertical offset */
+                height: 0; /* Hide the connector line above columns */
             }
         }
 
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.2rem; /* Further reduce heading size */
+            }
+
+            .node {
+                font-size: 0.8rem; /* Smaller font size for very small screens */
+                padding: 6px 10px; /* Adjust padding */
+            }
+        }
     </style>
 </head>
 <body>
 
-<div>
-
 <h1>Omnia Deployment Flowchart</h1>
-<nav class="nav">
-    <ul>
-        <li>
-            <a style="background-color: red; font-family: Arial, sans-serif;" href="#">Start</a> <!-- "Start" as the parent menu item -->
-            <ul>
-                <li>
-                    <a href="#">Prepare OIM</a> <!-- "Prepare OIM" as the second item under "Start" -->
-                    <ul>
-                        <li>
-                            <a href="#">Prereq.sh</a> <!-- "Prereq.sh" as the third item -->
-                            <ul>
-                                <li>
-                                    <a href="#">Local Repositories</a> <!-- "Local Repositories" as a decision node -->
-                                    <ul>
-                                        <li>
-                                            <a href="#">Provision Cluster</a> <!-- "Local Repositories" as a decision node -->
-                                            <ul>
-                                                <li>
-                                                    <a href="#">Create Node Inventory</a> <!-- "Local Repositories" as a decision node -->
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">Slurm(HPC)</a>
-                                                            <ul>
-                                                                <li>
-                                                                    <a href="#">Configure cluster</a>
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="#">Execute omnia.yml</a>
-                                                                            <ul>
-                                                                                <li>
-                                                                                    <a href="https://www.google.com" target="_blank">Run HPC jobs</a>
-                                                                                </li>
-                                                                            </ul>
+<div class="flowchart">
 
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">Kubernetes(AI)</a>
-                                                            <ul>
-                                                                <li>
-                                                                    <a href="#">Configure cluster</a>
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="#">Execute omnia.yml</a>
-                                                                            <ul>
-                                                                                <li>
-                                                                                    <a href="#">Run AI jobs</a> <!-- "Local Repositories" as a decision node -->
-                                                                                </li>
-                                                                            </ul>
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+    <!-- Linear Steps -->
+    <div class="step">
+        <div class="node">Start</div>
+        <div class="connector"></div>
+    </div>
+    <div class="step">
+        <div class="node">Prepare OIM</div>
+        <div class="connector"></div>
+    </div>
+    <div class="step">
+        <div class="node">Prereq.sh</div>
+        <div class="connector"></div>
+    </div>
+    <div class="step">
+        <div class="node">Local Repositories</div>
+        <div class="connector"></div>
+    </div>
+    <div class="step">
+        <div class="node">Provision Cluster</div>
+        <div class="connector"></div>
+    </div>
+    <div class="step">
+        <div class="node">Create Node Inventory</div>
+        <div class="connector"></div>
+    </div>
 
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
-</nav>
+    <!-- Branching Section -->
+    <div class="branch">
+        <!-- Left Branch: Slurm (HPC) -->
+        <div class="column">
+            <div class="node">Slurm (HPC)</div>
+            <div class="connector"></div>
+            <div class="node">Configure Cluster</div>
+            <div class="connector"></div>
+            <div class="node">Execute Omnia.yml</div>
+            <div class="connector"></div>
+            <div class="node">
+                <a href="https://www.google.com" target="_blank">Run HPC Jobs</a>
+            </div>
+        </div>
+
+        <!-- Right Branch: Kubernetes (AI) -->
+        <div class="column">
+            <div class="node">Kubernetes (AI)</div>
+            <div class="connector"></div>
+            <div class="node">Configure Cluster</div>
+            <div class="connector"></div>
+            <div class="node">Execute Omnia.yml</div>
+            <div class="connector"></div>
+            <div class="node">Run AI Jobs</div>
+        </div>
+    </div>
+
 </div>
+
 </body>
 </html>
