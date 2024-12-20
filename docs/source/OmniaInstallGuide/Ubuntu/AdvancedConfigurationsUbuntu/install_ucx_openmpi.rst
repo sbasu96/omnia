@@ -10,7 +10,7 @@ Configuring UCX and OpenMPI on the cluster
                     {"name": "openmpi", "version": "4.1.6"}
                  ]
 
-.. note:: For clusters running on Ubuntu 24.04 OS, the versions for UCX and OpenMPI will be ``1.15.0`` and ``4.1.6`` respectively.
+.. note:: For clusters running on Ubuntu 24.04 OS, the versions for UCX and OpenMPI will be ``1.17.0`` and ``5.0.4`` respectively.
 
 * Ensure to run ``local_repo.yml`` with the ``ucx`` and ``openmpi`` entry present in ``software_config.json``, to download all required UCX and OpenMPI packages.
 

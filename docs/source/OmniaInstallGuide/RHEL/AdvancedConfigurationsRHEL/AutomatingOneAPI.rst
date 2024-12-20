@@ -32,15 +32,18 @@ This topic explains how to automatically update servers for MPI jobs.
 To execute a single node job, use the following script: ::
 
     #!/bin/bash
-    #SBATCH --job-name=testAMD
-    #SBATCH --output=/home/testAMD%j.log
+    #SBATCH --job-name=testMPI
+    #SBATCH --output=output%j.txt
     #SBATCH --partition=normal
-    #SBATCH --nodelist=node001.omnia.test
-    #SBATCH --time=10:00
-    #SBATCH --ntasks=1
-
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/benchmarks/openmpi-4.1.6/openmpi/lib
-    srun --mpi=pmi2 /home/amd-zen-hpl-2024_10_08/xhpl
+    source /opt/intel/oneapi/setvars.sh
+    pwd; hostname; date
+    export FI_PROVIDER=tcp
+    export PATH=$PATH:/home/benchmarks/openmpi-4.1.6/openmpi/bin/
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/benchmarks/openmpi-4.1.6/openmpi/lib/
+    #srun hostname
+    srun -N 1 --cpus-per-task=1 /home/benchmarks_2025.0/linux/share/mkl/benchmarks/mp_linpack/runme_intel64_dynamic
+    date
+    sleep 10
 
 **To execute multi-node jobs**
 
@@ -59,11 +62,11 @@ To execute a single node job, use the following script: ::
 
 Job execution can now be initiated.
 
-.. note:: Ensure ``runme_intel64_dynamic`` is downloaded before running this command.
+.. note:: Ensure ``runme_intel64_dynamic`` is downloaded before running running the below command.
 
 ::
 
-    srun -N 2 /mnt/nfs_shares/appshare/mkl/2023.0.0/benchmarks/mp_linpack/runme_intel64_dynamic
+    srun -N 2 /home/<intel benchmarks path>/runme_intel64_dynamic
 
 
 For a batch job using the same parameters, the script would be: ::
