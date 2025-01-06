@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: white; /* Dark blue background */
+            background-color: white;
             color: #ccc;
             margin: 0;
             padding: 20px;
@@ -26,7 +26,7 @@
             flex-direction: column;
             align-items: center;
             margin-top: 20px;
-            padding: 0 10px; /* Padding for smaller screens */
+            padding: 0 10px;
         }
 
         .step {
@@ -43,11 +43,11 @@
             border-radius: 5px;
             background-color: #007BFF;
             color: #fff;
-            font-size: 1rem; /* Use relative font size */
+            font-size: 1rem;
             border: 1px solid #ccc;
             width: fit-content;
-            max-width: 90%; /* Prevent overflow on smaller screens */
-            word-wrap: break-word; /* Handle long text gracefully */
+            max-width: 90%;
+            word-wrap: break-word;
         }
 
         .node:hover {
@@ -61,6 +61,26 @@
             background-color: #ccc;
         }
 
+        .decision-box {
+            width: 110px;
+            height: 110px;
+            background-color: #f0f8ff;
+            border: 2px solid #000;
+            transform: rotate(45deg); /* Make it diamond-shaped */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            z-index: 2;
+        }
+
+        .decision-box span {
+            transform: rotate(-45deg); /* Rotate text back to horizontal */
+            font-size: 1rem;
+            color: #333;
+            text-align: center;
+        }
+
         .branch {
             display: flex;
             justify-content: space-between;
@@ -69,36 +89,36 @@
             position: relative;
             width: 100%;
             max-width: 800px;
-            gap: 20px; /* Add spacing between columns */
+            gap: 20px;
         }
 
-        /* Horizontal line between the branches */
         .branch::before {
             content: '';
             position: absolute;
-            top: -10px;
-            left: calc(25% - 20px); /* Start from the left connector */
-            width: calc(50% + 40px); /* Dynamic width for branch line */
+            top: -98px;
+            left: calc(25% - 20px);
+            width: calc(50% + 40px);
             height: 2px;
             background-color: #ccc;
+            z-index: 1;
         }
 
         .column {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 45%; /* Equal width for columns */
+            width: 45%;
             position: relative;
-            margin-top: 20px; /* Space between horizontal line and columns */
+            margin-top: 20px;
         }
 
         .column::before {
             content: '';
             position: absolute;
-            top: -30px; /* Connects to the horizontal line */
+            top: -119px;
             left: 50%;
             width: 2px;
-            height: 30px; /* Extend to touch horizontal branch */
+            height: 118px;
             background-color: #ccc;
             transform: translateX(-50%);
         }
@@ -112,47 +132,54 @@
             color: #000;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.5rem; /* Adjust heading size */
-            }
-
-            .node {
-                font-size: 0.9rem; /* Reduce font size */
-                padding: 8px 12px; /* Adjust padding */
-            }
-
-            .branch {
-                flex-direction: column; /* Stack columns vertically on smaller screens */
-                gap: 0; /* Remove spacing between stacked columns */
-            }
-
-            .column {
-                width: 100%; /* Make columns take full width */
-                margin-top: 15px; /* Adjust spacing for stacked layout */
-            }
-
-            .branch::before {
-                width: 0; /* Remove the horizontal line for stacked layout */
-            }
-
-            .column::before {
-                top: 0; /* Remove vertical offset */
-                height: 0; /* Hide the connector line above columns */
-            }
+        /* Tooltip (Pop-up) Styles */
+        .tooltip {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 100%; /* Position to the right of the element */
+            margin-left: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 1rem;
+            width: 200px;
+            max-width: 300px;
+            z-index: 10;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.2rem; /* Further reduce heading size */
-            }
-
-            .node {
-                font-size: 0.8rem; /* Smaller font size for very small screens */
-                padding: 6px 10px; /* Adjust padding */
-            }
+        .tooltip::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 10px;
+            border-style: solid;
+            border-color: transparent transparent rgba(0, 0, 0, 0.8) transparent;
         }
+
+        /* Close button (X) */
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            background-color: darkred;
+        }
+
     </style>
 </head>
 <body>
@@ -166,7 +193,7 @@
         <div class="connector"></div>
     </div>
     <div class="step">
-        <div class="node">Prepare OIM</div>
+        <div class="node" id="prepare-oim">Prepare OIM</div>
         <div class="connector"></div>
     </div>
     <div class="step">
@@ -182,8 +209,9 @@
         <div class="connector"></div>
     </div>
     <div class="step">
-        <div class="node">Create Node Inventory</div>
-        <div class="connector"></div>
+        <div class="decision-box">
+            <span>Create Node Inventory?</span>
+        </div>
     </div>
 
     <!-- Branching Section -->
@@ -214,6 +242,41 @@
     </div>
 
 </div>
+
+<!-- Tooltip/Pop-up -->
+<div class="tooltip" id="oim-tooltip">
+    <button class="close-btn" id="close-btn">&times;</button>
+    1. step 1<br>
+    2. step 2<br>
+    3. step 3
+</div>
+
+<script>
+    // Get references to the Prepare OIM element, tooltip, and close button
+    const prepareOIM = document.getElementById('prepare-oim');
+    const tooltip = document.getElementById('oim-tooltip');
+    const closeBtn = document.getElementById('close-btn');
+
+    // Show the tooltip when Prepare OIM is clicked
+    prepareOIM.addEventListener('click', function(event) {
+        tooltip.style.display = 'block';
+        const rect = prepareOIM.getBoundingClientRect();
+        tooltip.style.top = `${rect.top}px`;
+        tooltip.style.left = `${rect.right + 10}px`; // Positioned to the right
+    });
+
+    // Hide the tooltip when close button (X) is clicked
+    closeBtn.addEventListener('click', function() {
+        tooltip.style.display = 'none';
+    });
+
+    // Hide the tooltip if clicked outside
+    window.addEventListener('click', function(event) {
+        if (!prepareOIM.contains(event.target) && !tooltip.contains(event.target)) {
+            tooltip.style.display = 'none';
+        }
+    });
+</script>
 
 </body>
 </html>
