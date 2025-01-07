@@ -44,6 +44,7 @@ To deploy the Omnia provision tool, ensure that ``input/provision_config.yml``, 
 
     * If you intend to configure additional NICs during provisioning, ensure that you are aware of the network and NIC details of the cluster.
     * You can only use the below [optional] functionality on new nodes (during first provisioning). Nodes which have already been provisioned and are in booted state can't be modified with a re-run of ``discovery_provision.yml`` playbook.
+    * For a node in the "booted" state, configuring additional NICs or kernel parameter changes is not possible with a re-run of the ``discovery_provision.yml`` playbook. Instead, use the ``server_spec_update.yml`` playbook to make any changes to the "booted" node. For more information, `click here <../AdvancedConfigurationsUbuntu/AdditionalNIC_ubuntu.html>`_.
 
 **[Optional] Configure additional NICs, assign IP rules, and specify Kernel Parameters on the nodes during cluster provisioning**
 
