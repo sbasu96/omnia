@@ -41,7 +41,7 @@
             padding: 10px 15px;
             margin: 2px 0;
             border-radius: 5px;
-            background-color: #007BFF;
+            background-color: #0672CB;
             color: #fff;
             font-size: 1rem;
             border: 1px solid #ccc;
@@ -51,8 +51,9 @@
         }
 
         .node:hover {
-            background-color: #c8e4f8;
-            color: #000;
+            background-color: #80C7FB;
+            color: blue;
+            cursor: pointer;
         }
 
         .connector {
@@ -61,44 +62,60 @@
             background-color: #ccc;
         }
 
+        .start-node {
+            background-color: green;
+            color: white;
+        }
+
         .decision-box {
-            width: 110px;
-            height: 110px;
-            background-color: #f0f8ff;
+            width: 90px;
+            height: 90px;
+            background-color: #37CC5C;
             border: 2px solid #000;
-            transform: rotate(45deg); /* Make it diamond-shaped */
+            transform: rotate(45deg);
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 20px 0;
             z-index: 2;
+            position: relative;
         }
 
         .decision-box span {
-            transform: rotate(-45deg); /* Rotate text back to horizontal */
+            transform: rotate(-45deg);
             font-size: 1rem;
-            color: #333;
+            color: white;
             text-align: center;
         }
 
         .branch {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-top: 10px;
+            align-items: center;
+            margin-top: 30px;
             position: relative;
             width: 100%;
-            max-width: 800px;
+            max-width: 1200px;
             gap: 20px;
         }
 
         .branch::before {
             content: '';
             position: absolute;
-            top: -98px;
-            left: calc(25% - 20px);
-            width: calc(50% + 40px);
+            top: -30px;
+            left: calc(25% - 30px);
+            width: calc(50% - 70px);
             height: 2px;
+            background-color: #ccc;
+            z-index: 1;
+        }
+        .branch::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: calc(25% - 6px );
+            width: calc(50% + 12px);
+            height: 3px;
             background-color: #ccc;
             z-index: 1;
         }
@@ -107,18 +124,64 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 45%;
+            width: 60%;
             position: relative;
-            margin-top: 20px;
+            margin-top: 21px;
+            max-width: 1000px;
+        }
+
+        .branch-label-left {
+            position: absolute;
+            top: -90px;
+            left: calc(50% + 30px);
+            font-size: 1rem;
+            font-weight: bold;
+            color: black;
+            background-color: white;
+            padding: 6px 6px;
+            border-radius: 4px;
+        }
+        .branch-label-right {
+            position: absolute;
+            top: -90px;
+            left: calc(50% - 130px);
+            font-size: 1rem;
+            font-weight: bold;
+            color: black;
+            background-color: white;
+            padding: 6px 6px;
+            border-radius: 4px;
+        }
+        .branch-child-label-left {
+            position: absolute;
+            top: -90px;
+            left: calc(60%);
+            font-size: 1rem;
+            font-weight: bold;
+            color: black;
+            background-color: white;
+            padding: 6px 6px;
+            border-radius: 4px;
+        }
+        .branch-child-label-right {
+            position: absolute;
+            top: -90px;
+            left: calc(20%);
+            font-size: 1rem;
+            font-weight: bold;
+            color: black;
+            background-color: white;
+            padding: 6px 6px;
+            border-radius: 4px;
         }
 
         .column::before {
             content: '';
             position: absolute;
-            top: -119px;
+            top: -50px;
             left: 50%;
             width: 2px;
-            height: 118px;
+            height: 50px;
             background-color: #ccc;
             transform: translateX(-50%);
         }
@@ -129,18 +192,17 @@
         }
 
         .node a:hover {
-            color: #000;
+            color: blue;
         }
 
-        /* Tooltip (Pop-up) Styles */
         .tooltip {
             display: none;
             position: absolute;
             top: 0;
-            left: 100%; /* Position to the right of the element */
+            left: 100%;
             margin-left: 10px;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
+            background-color: #FBEECE;
+            color: black;
             padding: 10px;
             border-radius: 5px;
             font-size: 1rem;
@@ -161,7 +223,6 @@
             border-color: transparent transparent rgba(0, 0, 0, 0.8) transparent;
         }
 
-        /* Close button (X) */
         .close-btn {
             position: absolute;
             top: 5px;
@@ -187,96 +248,155 @@
 <h1>Omnia Deployment Flowchart</h1>
 <div class="flowchart">
 
-    <!-- Linear Steps -->
     <div class="step">
-        <div class="node">Start</div>
+        <div class="node start-node">Start</div>
         <div class="connector"></div>
     </div>
     <div class="step">
         <div class="node" id="prepare-oim">Prepare OIM</div>
         <div class="connector"></div>
     </div>
-    <div class="step">
-        <div class="node">Prereq.sh</div>
-        <div class="connector"></div>
-    </div>
-    <div class="step">
-        <div class="node">Local Repositories</div>
-        <div class="connector"></div>
-    </div>
-    <div class="step">
-        <div class="node">Provision Cluster</div>
-        <div class="connector"></div>
-    </div>
+
+    <!-- Add Decision Box for "Choose your cluster OS" -->
     <div class="step">
         <div class="decision-box">
-            <span>Create Node Inventory?</span>
+            <span>Choose your cluster OS</span>
         </div>
+        <div class="connector"></div>
     </div>
 
-    <!-- Branching Section -->
+    <!-- Branch for Ubuntu and RHEL/Rocky -->
     <div class="branch">
-        <!-- Left Branch: Slurm (HPC) -->
+        <!-- Left Branch: Ubuntu -->
         <div class="column">
-            <div class="node">Slurm (HPC)</div>
+            <div class="branch-label-left">Ubuntu</div>
+            <div class="node">
+                <a href="https://omniahpc.readthedocs.io/en/test_html/OmniaInstallGuide/Ubuntu/Prereq.sh/index.html" target="_blank">Prereq.sh</a>
+            </div>
             <div class="connector"></div>
-            <div class="node">Configure Cluster</div>
+            <div class="node" id="local-repos">Local Repositories</div>
             <div class="connector"></div>
-            <div class="node">Execute Omnia.yml</div>
+            <div class="node" id="provision-cluster">Provision Cluster</div>
             <div class="connector"></div>
             <div class="node">
-                <a href="https://www.google.com" target="_blank">Run HPC Jobs</a>
+                <a href="https://omniahpc.readthedocs.io/en/test_html/OmniaInstallGuide/Ubuntu/ViewInventory.html" target="_blank">View Node Inventory</a>
+            </div>
+            <div class="connector"></div>
+            <div class="decision-box">
+                <span>HPC or AI cluster?</span>
+            </div>
+            <div class="connector"></div>
+            <div class="branch">
+                <!-- HPC Branch for Ubuntu -->
+                <div class="column">
+                    <div class="branch-child-label-left">HPC</div>
+                    <div class="connector"></div>
+                    <div class="node" id="configure-slurm-cluster">Configure Cluster</div>
+                    <div class="connector"></div>
+                    <div class="node">Execute omnia.yml playbook</div>
+                    <div class="connector"></div>
+                    <div class="node">Run HPC Jobs</div>
+                </div>
+                <!-- AI Branch for Ubuntu -->
+                <div class="column">
+                    <div class="branch-child-label-right">AI</div>
+                    <div class="connector"></div>
+                    <div class="node" id="configure-kubernetes-cluster">Configure Cluster</div>
+                    <div class="connector"></div>
+                    <div class="node">Execute omnia.yml playbook</div>
+                    <div class="connector"></div>
+                    <div class="node">Run AI Tools/Jobs</div>
+                </div>
             </div>
         </div>
 
-        <!-- Right Branch: Kubernetes (AI) -->
+        <!-- Right Branch: RHEL/Rocky -->
         <div class="column">
-            <div class="node">Kubernetes (AI)</div>
+            <div class="branch-label-right" id="rhel-rocky">RHEL/Rocky</div>
+            <div class="node">
+                <a href="https://omniahpc.readthedocs.io/en/test_html/OmniaInstallGuide/RHEL_Rocky/Prereq.sh/index.html" target="_blank">Prereq.sh</a>
+            </div>
             <div class="connector"></div>
-            <div class="node">Configure Cluster</div>
+            <div class="node" id="local-repos-rhel">Local Repositories</div>
             <div class="connector"></div>
-            <div class="node">Execute Omnia.yml</div>
+            <div class="node" id="provision-cluster-rhel">Provision Cluster</div>
             <div class="connector"></div>
-            <div class="node">Run AI Jobs</div>
+            <div class="node">
+                <a href="https://omniahpc.readthedocs.io/en/test_html/OmniaInstallGuide/RHEL_Rocky/ViewInventory.html" target="_blank">View Node Inventory</a>
+            </div>
+            <div class="connector"></div>
+            <div class="decision-box">
+                <span>HPC or AI cluster?</span>
+            </div>
+            <div class="connector"></div>
+            <div class="branch">
+                <!-- HPC Branch for RHEL/Rocky -->
+                <div class="column">
+                    <div class="branch-child-label-left">HPC</div>
+                    <div class="connector"></div>
+                    <div class="node" id="configure-slurm-cluster-rhel">Configure Cluster</div>
+                    <div class="connector"></div>
+                    <div class="node">Execute omnia.yml playbook</div>
+                    <div class="connector"></div>
+                    <div class="node">Run HPC Jobs</div>
+                </div>
+                <!-- AI Branch for RHEL/Rocky -->
+                <div class="column">
+                    <div class="branch-child-label-right">AI</div>
+                    <div class="connector"></div>
+                    <div class="node" id="configure-kubernetes-cluster-rhel">Configure Cluster</div>
+                    <div class="connector"></div>
+                    <div class="node">Execute omnia.yml playbook</div>
+                    <div class="connector"></div>
+                    <div class="node">Run AI Tools/Jobs</div>
+                </div>
+            </div>
         </div>
     </div>
 
 </div>
 
-<!-- Tooltip/Pop-up -->
-<div class="tooltip" id="oim-tooltip">
-    <button class="close-btn" id="close-btn">&times;</button>
-    1. step 1<br>
-    2. step 2<br>
-    3. step 3
+<!-- Tooltips (Pop-ups) for Steps -->
+<div id="tooltip" class="tooltip">
+    <p id="tooltip-content">Tooltip content will go here...</p>
+    <button class="close-btn" onclick="closeTooltip()">X</button>
 </div>
 
 <script>
-    // Get references to the Prepare OIM element, tooltip, and close button
-    const prepareOIM = document.getElementById('prepare-oim');
-    const tooltip = document.getElementById('oim-tooltip');
-    const closeBtn = document.getElementById('close-btn');
+    const nodes = document.querySelectorAll('.node');
+    const tooltip = document.getElementById('tooltip');
+    const tooltipContent = document.getElementById('tooltip-content');
 
-    // Show the tooltip when Prepare OIM is clicked
-    prepareOIM.addEventListener('click', function(event) {
-        tooltip.style.display = 'block';
-        const rect = prepareOIM.getBoundingClientRect();
-        tooltip.style.top = `${rect.top}px`;
-        tooltip.style.left = `${rect.right + 10}px`; // Positioned to the right
+    nodes.forEach(node => {
+        node.addEventListener('click', (event) => {
+            const stepId = event.target.id;
+            let content = '';
+
+            // Define content based on step
+            switch (stepId) {
+                case 'ubuntu':
+                    content = 'Ubuntu installation flow: Pre-requisite setup and provisioning.';
+                    break;
+                case 'rhel-rocky':
+                    content = 'RHEL/Rocky installation flow: Pre-requisite setup and provisioning.';
+                    break;
+                // Add cases for other steps as needed
+                default:
+                    content = 'Step description will go here.';
+            }
+
+            tooltipContent.textContent = content;
+            tooltip.style.display = 'block';
+            tooltip.style.left = `${event.pageX + 10}px`;
+            tooltip.style.top = `${event.pageY + 10}px`;
+        });
     });
 
-    // Hide the tooltip when close button (X) is clicked
-    closeBtn.addEventListener('click', function() {
+    function closeTooltip() {
         tooltip.style.display = 'none';
-    });
-
-    // Hide the tooltip if clicked outside
-    window.addEventListener('click', function(event) {
-        if (!prepareOIM.contains(event.target) && !tooltip.contains(event.target)) {
-            tooltip.style.display = 'none';
-        }
-    });
+    }
 </script>
+
 
 </body>
 </html>
