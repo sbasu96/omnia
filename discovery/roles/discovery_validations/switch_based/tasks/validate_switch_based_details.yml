@@ -13,40 +13,43 @@
 #  limitations under the License.
 ---
 
-- name: Assert that switch_based_details are not empty
-  ansible.builtin.assert:
-    that:
-      - switch_based_details | length > 0
-    success_msg: "{{ switch_details_success_msg }}"
-    fail_msg: "{{ switch_details_fail_msg }}"
+- name: Check switch reachability
+  verify_switch:
+    groups_roles_info: "{{ groups_roles_info }}"
+    netmask_bits: "{{ pxe_nic_netmask }}"
+    oim_nic_name: "{{ pxe_nic }}"
+  register: verify_switch_status
 
-- name: Assert details fro switch_based_details
-  ansible.builtin.assert:
-    that:
-      - item.ip != None
-      - item.ip | ansible.utils.ipv4
-      - item.ports != ''
-    success_msg: "{{ switch_details_success_msg }}"
-    fail_msg: "{{ switch_details_fail_msg }}"
-  with_items: "{{ switch_based_details }}"
-
-- name: Create list of switch IPs
+- name: Set fact for group details
   ansible.builtin.set_fact:
-    switch_based_ip_list: "{{ switch_based_ip_list | default([]) + [item.ip] }}"
-  with_items: "{{ switch_based_details }}"
+    verified_switch_groups: "{{ verify_switch_status.verified_switch_groups }}"
+    unreachable_switch_ip_groups: "{{ verify_switch_status.unreachable_switch_groups }}"
+    discovery_mech_switch_based: "{{ verify_switch_status.switch_status }}"
+    switch_status: "{{ verify_switch_status.switch_status }}"
+    groups_roles_info: "{{ verify_switch_status.groups_roles_info }}"
+    invalid_switch_groups: "{{ verify_switch_status.invalid_switch_groups }}"
 
-- name: Create list of switch IPs - Ensure unique
-  ansible.builtin.set_fact:
-    switch_based_ip_list: "{{ switch_based_ip_list | unique }}"
+- name: Display verified switch groups details
+  ansible.builtin.debug:
+    var: verified_switch_groups
+  when: verified_switch_groups | length > 0
 
-- name: Fail if unique IPs are not present
+- name: Warning for unreachable switches
+  when: unreachable_switch_ip_groups | length > 0
+  block:
+    - name: Display warning if there are unreachable switches
+      ansible.builtin.debug:
+        msg: "{{ switch_unreachable_message }}"
+
+- name: Warning for invalid bmc details static_range for switch_based
+  when: invalid_switch_groups | length > 0
+  block:
+    - name: Display warning if there are invalid bmc details for static_range for switch discovery
+      ansible.builtin.debug:
+        msg: "{{ invalid_bmc_static_range_message }}"
+
+- name: Fail switch based discovery when no verified switch based groups founds
   ansible.builtin.fail:
-    msg: "{{ fail_unique_switch_v3_ip }}"
-  when: switch_based_ip_list | union(switch_based_details) | length != (switch_based_ip_list | length + switch_based_details | length)
-
-- name: Test using ping
-  ansible.builtin.command: |
-    {{ python_version }}  {{ ping_switch_py }} {{ item.ip }}
-  register: ping_switchv3
-  with_items: "{{ switch_based_details }}"
-  changed_when: false
+    msg: "{{ switch_based_failed_msg }}"
+  when:
+    - invalid_switch_groups | length > 0 or unreachable_switch_ip_groups | length > 0

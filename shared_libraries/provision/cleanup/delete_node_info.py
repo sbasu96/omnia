@@ -38,6 +38,9 @@ def delete_node_info_from_oim(nodename):
         command = ['/opt/xcat/sbin/makehosts', '-d', nodename]
         temp = subprocess.run(command, shell=False, check=True)
 
+        command = ['/opt/xcat/sbin/makedhcp', '-d', nodename]
+        temp = subprocess.run(command, shell=False, check=True)
+
         # Delete the nodes from xcat
         command = ['/opt/xcat/bin/rmdef', nodename]
         temp = subprocess.run(command, shell=False, check=True)
@@ -73,7 +76,7 @@ def delete_node_info_from_inventory_files(inv_file_folder, nodeinfo):
 
     servicetag = ''
     found = False
-    inv_files = ["compute_hostname_ip", "compute_gpu_amd", "compute_gpu_nvidia", "compute_cpu_amd", "compute_cpu_intel", "compute_gpu_intel"]
+    inv_files = ["compute_hostname_ip", "compute_gpu_amd", "compute_gpu_nvidia", "compute_cpu_amd", "compute_cpu_intel", "compute_gpu_intel", "cluster_layout"]
     for file_name in inv_files:
         try:
             file_path = os.path.join(inv_file_folder, file_name)

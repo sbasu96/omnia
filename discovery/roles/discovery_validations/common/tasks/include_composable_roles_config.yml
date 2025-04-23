@@ -1,0 +1,54 @@
+# Copyright 2025 Dell Inc. or its subsidiaries. All Rights Reserved.
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+---
+
+- name: Set Facts for composable roles data
+  ansible.builtin.set_fact:
+    composable_roles_output: "{{ hostvars['localhost']['composable_roles_output'] }}"
+
+- name: Set Facts for composable roles data
+  ansible.builtin.set_fact:
+    roles_data: "{{ composable_roles_output.roles_data }}"
+    groups_data: "{{ composable_roles_output.groups_data }}"
+    roles_groups_data: "{{ composable_roles_output.roles_groups_data }}"
+    bmc_static_status: "{{ composable_roles_output.bmc_static_status }}"
+    switch_status: "{{ composable_roles_output.switch_status }}"
+    hierarchical_provision_status: "{{ composable_roles_output.hierarchical_provision_status }}"
+    groups_roles_info: "{{ composable_roles_output.groups_roles_info }}"
+    hierarchical_service_node_data: "{{ composable_roles_output.hierarchical_service_node_data }}"
+
+# Will uncomment once NFS supported for hierarchical-based discovery
+# - name: Fail if omnia_share_option is not "NFS" during hierarchical-based discovery and provisioning
+#   ansible.builtin.fail:
+#     msg: "{{ invalid_share_option_msg | replace('\n', ' ') }}"
+#   when:
+#     - "'service_node' in roles_data"
+#     - omnia_share_option != 'NFS'
+
+- name: Set fact for service_node role required
+  ansible.builtin.set_fact:
+    service_role_required: "{{ 'true' if 'service_node' in roles_groups_data else 'false' }}"
+
+- name: Get the group(s) for OIM HA
+  when:
+    - "'oim_ha_node' in roles_data"
+    - enable_oim_ha | default(False)
+  ansible.builtin.set_fact:
+    oim_ha_groups: "{{ roles_data['oim_ha_node']['groups'] | default([]) }}"
+
+- name: Display filtered group wise details
+  ansible.builtin.debug:
+    msg: "{{ groups_roles_info }}"
+    verbosity: 2
+  when: bmc_static_status or switch_status

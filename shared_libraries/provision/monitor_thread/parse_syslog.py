@@ -62,7 +62,8 @@ def get_node_info_db(cursor: cursor, node: str) -> tuple:
             gpu_count,
             status,
             admin_mac,
-            hostname
+            hostname,
+            role
         FROM
             cluster.nodeinfo
         WHERE
@@ -290,7 +291,55 @@ def add_hostname_inventory(inventory_file: str, hostname: str) -> None:
         # Change the permission of the file to readonly
         os.chmod(inventory_file, 0o444)
 
+def generate_inventory_for_node(node_info_db: tuple) -> None:
+    """
+    generate_inventory_for_node: Generates the inventory file for the node based on the information in the database.
 
+    Parameters:
+        node_info_db (tuple): A tuple containing the service tag, admin IP, CPU, GPU, and hostname from the database.
+    
+    Returns:
+        None
+    """
+    try:
+       omnia_inventory_file = "/opt/omnia/omnia_inventory/cluster_layout"
+        # Read the inventory file
+       if not os.path.exists(omnia_inventory_file):
+       # Create a new file if it doesn't exist
+          with open(omnia_inventory_file, 'w+') as file:
+             existing_inventory = file.read()
+       else:
+          # Open the file in read mode if it exists
+          with open(omnia_inventory_file, 'r') as file:
+             existing_inventory = file.read()
+
+       # unpacking
+       hostname, roles_name = node_info_db[8], node_info_db[9]
+       roles_list = roles_name.strip().split(",")
+       for group in roles_list:
+           group = group.strip()
+           if 'default' in group:
+                continue
+           else:
+                if group in existing_inventory:
+                    existing_inventory += f"{hostname}\n"
+                elif group not in existing_inventory:
+                    existing_inventory += f"\n[{group}]\n"
+                    existing_inventory += f"{hostname}\n"
+
+        # Write the updated inventory back to the file
+       with open(omnia_inventory_file, 'w') as file:
+           file.write(existing_inventory)
+
+    except FileNotFoundError:
+        # Print an error message if the file is not found
+        syslog.syslog(syslog.LOG_ERR, f"parse_syslog:generate_inventory_for_node: File not found:", omnia_inventory_file)
+    except PermissionError:
+        # Print an error message if the file cannot be accessed due to insufficient permissions
+        syslog.syslog(syslog.LOG_ERR, f"parse_syslog:generate_inventory_for_node: Permission denied:", omnia_inventory_file)
+    except Exception as e:
+        syslog.syslog(syslog.LOG_ERR, f"parse_syslog:generate_inventory_for_node: Exception occurred: {str(type(e))} {str(e)}")
+     
 def update_inventory(node_info_db: tuple, updated_node_info: tuple) -> None:
     """
 	Update the inventory files based on the changes in the node information.
