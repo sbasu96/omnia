@@ -5,7 +5,7 @@ Set up Kubernetes on the compute cluster
 Prerequisites
 ===============
 
-* Ensure that ``k8s`` entry is present in the ``softwares`` list in ``software_config.json``, as mentioned below:
+* Ensure that ``compute_k8s`` entry is present in the ``softwares`` list in ``software_config.json``, as mentioned below:
     
     ::
 
@@ -13,7 +13,7 @@ Prerequisites
                         {"name": "k8s", "version":"1.31.4"},
                      ]
 
-* Ensure to run ``local_repo.yml`` with the ``k8s`` entry present in ``software_config.json``, to download all required Kubernetes packages and images.
+* Ensure to run ``local_repo.yml`` with the ``compute_k8s`` entry present in ``software_config.json``, to download all required Kubernetes packages and images.
 
 * Once all the required parameters in `omnia_config.yml <../schedulerinputparams.html#id12>`_ are filled in, ``omnia.yml`` can be used to set up Kubernetes.
 
@@ -72,7 +72,7 @@ Additional installations
     * Additional packages for Kubernetes will be deployed only if ``nfs`` entry is present in the ``/opt/omnia/input/project_default/software_config.json``.
     * If the ``nfs_server_ip`` in ``/opt/omnia/input/project_default/storage_config.yml`` is left blank, you must provide a valid external NFS server IP for the ``nfs_server_ip`` parameter.
 
-After deploying Kubernetes, you can install the following additional packages on top of the Kubernetes stack on the compute cluster:
+If the ``nfs_server_ip`` value is provided, then after deploying Kubernetes, the following additional plugins are installed on top of the Kubernetes stack on the compute cluster:
 
 1.	**nfs-client-provisioner**
 
@@ -90,11 +90,3 @@ After deploying Kubernetes, you can install the following additional packages on
     Omnia installs the whereabouts plugin as part of ``omnia.yml`` or ``scheduler.yml`` execution. The details of the plugin is present in the ``omnia/input/config/<cluster os>/<os version>/k8s.json`` file.
 
     Click `here <https://github.com/k8snetworkplumbingwg/whereabouts>`_ for more information.
-
-3. **CSI-driver-for-PowerScale**
-
-    The CSI Driver for Dell PowerScale (formerly known as Isilon) is a Container Storage Interface (CSI) plugin that enables Kubernetes to provision and manage persistent storage using PowerScale.
-    It enables Kubernetes clusters to dynamically provision, bind, expand, snapshot, and manage volumes on a PowerScale node.
-    Omnia installs the multus plugin as part of ``omnia.yml`` or ``scheduler.yml`` execution.
-
-    Click `here <../../../../AdvancedConfigurations/PowerScale_CSI.html>`_ for more information.
