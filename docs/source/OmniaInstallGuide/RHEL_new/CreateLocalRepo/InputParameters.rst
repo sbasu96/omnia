@@ -46,6 +46,12 @@ Here's a sample of the ``software_config.json`` for RHEL clusters:
     ]
     }
 
+.. csv-table:: architecture information for softwares
+   :file: ../../../Tables/Software_arch.csv
+   :header-rows: 1
+   :keepspace:
+   :widths: auto
+
 .. note::
 
     * To download a software for only x86_64 or aarch64 architecture, the arch key input is not mandatory. It will default to roles_config and the architecture is read accordingly.
