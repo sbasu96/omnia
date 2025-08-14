@@ -57,6 +57,9 @@ Here's a sample of the ``software_config.json`` for RHEL clusters:
     * To download a software for only x86_64 or aarch64 architecture, the arch key input is not mandatory. It will default to roles_config and the architecture is read accordingly.
       See the following sample:
 
+
+     ::
+
       {
         "cluster_os_type": "rhel",
         "cluster_os_version": "9.6",
@@ -94,7 +97,9 @@ Here's a sample of the ``software_config.json`` for RHEL clusters:
         }
 
     * To download a software with both x86_64 and aarch64 architectures, the arch key input is mandatory. Ensure that you check if the .json files for all the specified architectures are available in the input or configuration file. Else, update the .json files. See the following sample:
-      
+
+     ::
+
         {
             "cluster_os_type": "rhel",
             "cluster_os_version": "9.6",
