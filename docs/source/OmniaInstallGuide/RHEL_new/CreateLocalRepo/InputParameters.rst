@@ -46,7 +46,7 @@ Here's a sample of the ``software_config.json`` for RHEL clusters:
     ]
     }
 
-.. csv-table:: architecture information for softwares
+.. csv-table:: Architecture information for softwares
    :file: ../../../Tables/Software_arch.csv
    :header-rows: 1
    :keepspace:
