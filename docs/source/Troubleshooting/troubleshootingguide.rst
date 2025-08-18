@@ -48,17 +48,17 @@ When you run the omnia.yml, scheduler.yml, or service_k8s_cluster.yml files, som
 
 **Resolution**: Do the following:
         1. Retrieve all the deployments using the following command: 
-         ::
+        ::
                 kubectl get deployments -A
         2. Delete the dns-autoscaler deployment: 
-         ::
+        ::
                 kubectl delete deployment dns-autoscaler -n kube-system
         3. Identify and edit the CoreDNS deployment name from the list of deployments retrieved in step 1: 
-         ::
+        ::
                 kubectl edit deployment <coredns-deployment-name> -n kube-system
         4. Locate the 'replicas' field in the editor and change the value from 3 to 2.
         5. Save the changes. Kubernetes automatically restarts the CoreDNS deployment.
         6. Wait a few minutes for the pods to restart and verify the CoreDNS status: 
-         ::
+        ::
                 kubectl get pods -A
          Ensure that two CoreDNS pods are in the 'Running' state.
