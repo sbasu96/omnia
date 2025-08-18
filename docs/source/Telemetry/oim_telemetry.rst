@@ -25,7 +25,7 @@ Prerequisites
     * Additionally, the ``idrac_telemetry_receiver``, ``activemq``, ``mysqldb``, and ``prometheus_pump`` containers are deployed inside the iDRAC telemetry pods to facilitate telemetry data collection. 
 
 .. csv-table:: telemetry_config.yml
-   :file: ..Tables/telemetry_config.csv
+   :file: ../Tables/telemetry_config.csv
    :header-rows: 1
    :keepspace:
 
