@@ -39,9 +39,9 @@ Sample inventory for HA
     10.11.0.9
 
     [etcd]
-    10.11.0.3
-    10.11.0.7
-    10.11.0.8
+    10.11.0.1
+    10.11.0.15
+    10.11.0.9
 
     [kube_node]
     10.11.0.1
@@ -61,5 +61,16 @@ Once all the details are provided to the input files and the Kubespray container
 
     ansible-playbook scheduler.yml -i <inventory_file_path>
 
+Sample
+-------
 
+::
+    
+    compute_k8s_cluster_ha:
+        - cluster_name: compute_cluster
+          enable_k8s_ha: false
+          virtual_ip_address: ""
+          external_loadbalancer_ip: ""
+          loadbalancer_port:
+          active_node_service_tags: [ABCD123, DEF4567]
 

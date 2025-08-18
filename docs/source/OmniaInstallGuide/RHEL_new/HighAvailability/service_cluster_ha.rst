@@ -21,11 +21,11 @@ Prerequisites
 Playbook execution
 -------------------
 
-Once the details have been provided to the input files and the ``prepare_oim.yml`` playbook is executed, passive service nodes can be discovered during the cluster discovery and provision process using the below command:
+Once all the details are provided to the input files and the Kubespray container image is uploaded to the Dell registry, the ``service_k8s_cluster.yml``  playbook can be executed to deploy the Kubernetes cluster. 
 
 ::
 
-    ansible-playbook discovery_provision.yml
+    ansible-playbook service_k8s_cluster.yml
 
 Sample
 -------
