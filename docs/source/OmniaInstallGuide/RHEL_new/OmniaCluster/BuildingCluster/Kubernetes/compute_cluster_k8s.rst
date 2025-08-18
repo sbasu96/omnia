@@ -15,9 +15,9 @@ Prerequisites
 
 * Ensure to run ``local_repo.yml`` with the ``compute_k8s`` entry present in ``software_config.json``, to download all required Kubernetes packages and images.
 
-* Once all the required parameters in `omnia_config.yml <../schedulerinputparams.html#id12>`_ are filled in, ``omnia.yml`` can be used to set up Kubernetes.
+* Once all the required parameters in `omnia_config.yml <../schedulerinputparams.html#opt-omnia-input-project-default-omnia-config-yml>`_ are filled in, ``omnia.yml`` can be used to set up Kubernetes.
 
-* Ensure that ``k8s_share`` is set to ``true`` in `storage_config.yml <../schedulerinputparams.html#storage-config-yml>`_, for one of the entries in ``nfs_client_params``.
+* Ensure that ``k8s_share`` is set to ``true`` in `storage_config.yml <../schedulerinputparams.html#opt-omnia-input-project-default-storage-config-yml>`_, for one of the entries in ``nfs_client_params``.
 
 Inventory details
 ==================
