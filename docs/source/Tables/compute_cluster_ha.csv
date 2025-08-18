@@ -1,6 +1,6 @@
 ﻿Parameter,Mandatory/Optional/Conditional Mandatory,Details
 ``cluster_name``,Mandatory,"* **Type**: String
-* * Name of the Kubernetes cluster for which you want to set up HA."
+* Name of the Kubernetes cluster for which you want to set up HA."
 ``enable_k8s_ha``,Mandatory,"* **Type**: boolean
 * Set the variable to ``true`` to enable HA for the Kubernetes cluster.
 * **Accepted values**: ``true`` or ``false``"
@@ -9,6 +9,3 @@
 * This parameter captures the virtual IP address of the admin network.
 * Ensure that the virtual IP is not assigned to any node in the cluster.
 * **Example**: ``10.11.255.10``"
-,,
-,,
-,,
