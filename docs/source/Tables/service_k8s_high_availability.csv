@@ -8,6 +8,3 @@
 ``virtual_ip_address``,"* **Type**: String
 * This is a mandatory and user-configurable parameter.
 * Captures the virtual IP address for the K8s service node HA setup. Ensure that the ``virtual_ip_address`` does not belong to the ``dynamic_range`` or ``static_range`` mentioned in the `network_spec.yml <../Provision/provisionparams.html#id6>`_."
-,
-,
-,
