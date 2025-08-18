@@ -8,10 +8,12 @@
 ``idrac_telemetry_collection_type``,Mandatory,"* **Type**: String
 * Specifies the tool that collects the iDRAC telemetry data. This parameter is mandatory if ``idrac_telemetry_support`` is set to ``true``.
 * If ``idrac_telemetry_support`` is set to ``true`` and ``idrac_telemetry_collection_type`` is ``prometheus``, Omnia deploys the iDRAC telemetry pods with ``idrac_telemetry_receiver``, ``mysqldb``, ``prometheus_pump``, and ``activemq`` containers during the execution of the ``prepare_oim.yml`` or ``service_k8s_cluster.yml``  playbook.
-* If ``idrac_telemetry_support`` is set to ``true`` and ``idrac_telemetry_collection_type`` is ``kafka``, Omnia deploys the iDRAC telemetry pods with ``idrac_telemetry_receiver``, ``mysqldb``, ``kafka_pump``, and ``activemq`` containers during the execution of the ``prepare_oim.yml`` or ``service_k8s_cluster.yml``  playbook..
+* If ``idrac_telemetry_support`` is set to ``true`` and ``idrac_telemetry_collection_type`` is ``kafka``, Omnia deploys the iDRAC telemetry pods with ``idrac_telemetry_receiver``, ``mysqldb``, ``kafka_pump``, and ``activemq`` containers during the execution of the ``prepare_oim.yml`` or ``discovery_provision.yml``  playbook.
 * **Accepted value**: ``prometheus`` or ``kafka``
 * **Sample**: ``idrac_telemetry_collection_type: ""kafka""``  
-* **Default value**: : ``kafka``"
+* **Default value**: : ``kafka``
+
+.. note:: If Kafka is deployed as the iDRAC telemetry collector on the OIM or service cluster, you cannot switch to Prometheus simply by modifying the collector type in ``telemetry_config.yml`` and re-running the ``prepare_oim.yml`` or ``service_k8s_cluster.yml`` playbook. To change the collector type on the OIM or service cluster, you must reprovision the clusters using the ``service_k8s_cluster.yml`` playbook."
 ``visualization_support``,Optional,"* **Type**: Boolean
 * Enables visualizations for the iDRAC telemtry data via Grafana dashboards.
 * If ``visualization_support`` is set to ``true``, then the ``grafana``, ``loki``,  and ``promtail`` containers are deployed during the execution of the ``prepare_oim.yml`` playbook. 
@@ -40,7 +42,7 @@ kafka_configurations > ``log_retention_hours``,Optional,"* **Type**: Integer
 * The number of hours to retain Kafka logs before they are deleted.
 * **Default value**:  168 (7 days)"
 kafka_configurations > ``log_retention_bytes``,Optional,"* **Type**: Integer
-* The maximum size of Kafka Kafka logs (in bytes) before they are deleted.
+* The maximum size of Kafka logs (in bytes) before they are deleted.
 * **Default value**:  -1 (unlimited)"
 kafka_configurations > ``topic_partitions``,Optional,"* **Type**: Integer
 * The number of partitions for each Kafka topic.

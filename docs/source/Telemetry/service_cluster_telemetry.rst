@@ -58,6 +58,21 @@ After ``telemetry.yml`` has been executed for the service cluster, the Prometheu
 
 .. note:: Metrics visualization using Grafana is not supported for iDRAC telemetry metrics on service cluster.
 
+iDRAC telemetry logs collected by the Kafka pump
+=======================================================
+
+After ``telemetry.yml`` has been executed for the service cluster, the Kafka pump collects the iDRAC telemetry logs for each pod. To view these logs, do the following:
+
+    1. First, check if all the telemetry pods are running or not using the below command: ::
+
+        kubectl get pods -n telemetry
+
+    2. For each of the ``idrac-telemetry pod``, check the ``idrac_telemetry`` logs collected by the kafka pump using the below command: ::
+
+        kubectl logs <idrac-telemetry-pod> -n telemetry -c kafka-pump
+
+.. note:: Metrics visualization using Grafana is not supported for iDRAC telemetry metrics on service cluster.
+
 Accessing the ``mysqldb`` database
 ====================================
 
