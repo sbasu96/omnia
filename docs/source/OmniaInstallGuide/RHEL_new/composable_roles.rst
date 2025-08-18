@@ -78,14 +78,6 @@ Here's a sample (using mapping file) for your reference:
     Roles:
         - name: "default"
           groups:
-            - grp0
-
-        - name: "service_kube_control_plane"
-          groups:
-            - grp1
-    Roles:
-        - name: "default"
-          groups:
             - grp1
         - name: "service_kube_control_plane"
           groups:

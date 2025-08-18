@@ -37,7 +37,8 @@
 * **Default value**:  15"
 kafka_configurations > ``persistence_size``,Optional,"* **Type**: Integer
 * The amount of storage allocated for Kafka's persistent volume.
-* **Accepted values**: in the form of X[Ki|Mi|Gi|Ti|Pi|Ei]"".* ``Default value``: 8Gi"
+* **Accepted values**: a number followed by Ki, Mi, Gi, Ti, Pi, or Ei.
+* **Default value**: 8Gi"
 kafka_configurations > ``log_retention_hours``,Optional,"* **Type**: Integer
 * The number of hours to retain Kafka logs before they are deleted.
 * **Default value**:  168 (7 days)"
