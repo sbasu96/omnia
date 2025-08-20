@@ -78,10 +78,16 @@ Here's a sample (using mapping file) for your reference:
     Roles:
         - name: "default"
           groups:
-            - grp0
-
+            - grp1
         - name: "service_kube_control_plane"
           groups:
-            - grp1
+            - grp0
+        - name: "service_kube_node"
+          groups:
+            - grp0
+        - name: "service_etcd"
+          groups:
+            - grp0
+
 
 
