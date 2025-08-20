@@ -21,6 +21,7 @@ Here's a sample of the ``software_config.json`` for multiple architecture RHEL c
 
 ::
 
+    }
     {
     "cluster_os_type": "rhel",
     "cluster_os_version": "9.6",
@@ -30,12 +31,18 @@ Here's a sample of the ``software_config.json`` for multiple architecture RHEL c
         {"name": "amdgpu", "version": "6.3.1", "arch": ["x86_64"]},
         {"name": "cuda", "version": "12.8.0", "arch": ["x86_64","aarch64"]},
         {"name": "ofed", "version": "24.10-3.2.5.0", "arch": ["x86_64"]},
-        {"name": "openldap", "arch": ["x86_64","aarch64"]},
+        {"name": "freeipa", "arch": ["x86_64"]},
+        {"name": "openldap", "arch": ["x86_64"]},
         {"name": "nfs", "arch": ["x86_64","aarch64"]},
-        {"name": "k8s", "version":"1.31.4", "arch": ["x86_64"]},
-        {"name": "service_k8s","version": "1.31.4", "arch": ["x86_64","aarch64"]},
-        {"name": "slurm", "arch": ["x86_64","aarch64"]}
+        {"name": "slurm", "arch": ["x86_64","aarch64"]},
+        {"name": "k8s", "version": "1.31.4", "arch": ["x86_64"]},
+        {"name": "service_k8s", "version": "1.31.4", "arch": ["x86_64"]},
+        {"name": "utils", "arch": ["x86_64"]},
+        {"name": "ucx", "version": "1.15.0", "arch": ["x86_64"]},
+        {"name": "openmpi", "version": "4.1.6", "arch": ["x86_64"]},
+        {"name": "racadm", "arch": ["x86_64"]}
     ],
+
     "amdgpu": [
         {"name": "rocm", "version": "6.3.1" }
     ],
@@ -44,8 +51,8 @@ Here's a sample of the ``software_config.json`` for multiple architecture RHEL c
         {"name": "slurm_node"},
         {"name": "login"}
     ]
-    }
 
+}
 .. csv-table:: Architecture information for softwares
    :file: ../../../Tables/Software_arch.csv
    :header-rows: 1
