@@ -1,4 +1,4 @@
-"Parameter	",Mandatory/Optional,Details
+"Parameter	",Mandatory/Conditional Mandatory/Optional,Details
 ``idrac_telemetry_support``,Mandatory,"* **Type**: Boolean
 * If you want iDRAC telemetry support on your OIM or service cluster, set this variable to ``true`` before executing ``prepare_oim.yml`` or ``service_k8s_cluster.yml`` playbook.
 * **Accepted values**: ``true`` or ``false``
@@ -31,21 +31,21 @@
 * If this value is set to ``true``, Prometheus, Node Exporter, Alertmanager, and other related components will be deployed.
 * **Accepted values**:  ``true`` or ``false``
 * **Default value**: ``false``"
-``prometheus_scrape_interval``,Optional,"* **Type**: Integer
+``prometheus_scrape_interval``,Conditional Mandatory,"* **Type**: Integer
 * Specifies the time interval (in seconds) at which the prometheus metrics collection happens from the nodes.
 * Must be an integer greater than ``0`` (zero).
 * **Default value**:  15"
-kafka_configurations > ``persistence_size``,Optional,"* **Type**: Integer
+kafka_configurations > ``persistence_size``,Conditional Mandatory,"* **Type**: Integer
 * The amount of storage allocated for Kafka's persistent volume.
 * **Accepted values**: a number followed by Ki, Mi, Gi, Ti, Pi, or Ei.
 * **Default value**: 8Gi"
-kafka_configurations > ``log_retention_hours``,Optional,"* **Type**: Integer
+kafka_configurations > ``log_retention_hours``,Conditional Mandatory,"* **Type**: Integer
 * The number of hours to retain Kafka logs before they are deleted.
 * **Default value**:  168 (7 days)"
-kafka_configurations > ``log_retention_bytes``,Optional,"* **Type**: Integer
+kafka_configurations > ``log_retention_bytes``,Conditional Mandatory,"* **Type**: Integer
 * The maximum size of Kafka logs (in bytes) before they are deleted.
 * **Default value**:  -1 (unlimited)"
-kafka_configurations > ``topic_partitions``,Optional,"* **Type**: Integer
+kafka_configurations > ``topic_partitions``,Conditional Mandatory,"* **Type**: Integer
 * The number of partitions for each Kafka topic.
 * Increasing this can improve throughput but also increases storage or overhead.
 * **Default value**:  1"

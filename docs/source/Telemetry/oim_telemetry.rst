@@ -42,7 +42,7 @@ Once the cluster nodes have been provisioned using the ``discovery_provision.yml
 
 ::
 
-    ansible-playbook telemetry.yml
+    #cd telemetry ansible-playbook telemetry.yml
 
 .. note:: If you want to add an external node for ``idrac_telemetry`` acquisition, you can do so by editing the ``bmc_group_data.csv`` file manually and then re-running the ``telemetry.yml`` playbook. Sample: 
     ::
