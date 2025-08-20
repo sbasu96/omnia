@@ -51,8 +51,7 @@ Here's a sample of the ``software_config.json`` for multiple architecture RHEL c
         {"name": "slurm_node"},
         {"name": "login"}
     ]
-
-}
+    }
 
 .. csv-table:: Architecture information for softwares
    :file: ../../../Tables/Software_arch.csv
