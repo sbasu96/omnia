@@ -53,6 +53,7 @@ Here's a sample of the ``software_config.json`` for multiple architecture RHEL c
     ]
 
 }
+
 .. csv-table:: Architecture information for softwares
    :file: ../../../Tables/Software_arch.csv
    :header-rows: 1
