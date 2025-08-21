@@ -87,6 +87,9 @@ Prerequisites
          ::
             isi_gconfig -t web-config auth_basic=true
 
+7. Ensure that the nodes can establish a connection with the domains (nfsdata.ps.com and management.ps.com) before Powerscale deployment. The nodes must have the Powerscale upstream DNS IP as one of the entries in ``/etc/resolv.conf``. 
+ 
+
 .. note:: In order to integrate PowerScale solution to the deployed Kubernetes cluster, Omnia requires the following fixed parameter values in ``values.yaml`` file:
 
     * controllerCount: 1
