@@ -22,7 +22,7 @@
 
 .. note:: If ``visualization_support`` is set to ``true``, you will be prompted for the ``grafana_username`` and ``grafana_password`` parameters during the ``prepare_oim.yml`` playbook execution."
 ``federated_idrac_telemetry_collection``,Optional,"* **Type**: Boolean
-* If set to ``true``, Omnia deploys the iDRAC telemetry pods with ` containers on the parent ``service_kube_node`` during the execution of the ``service_k8s_cluster.yml`` playbook. This facilitates iDRAC telemetry data collection for the service cluster nodes.
+* If set to ``true``, Omnia deploys the iDRAC telemetry pods with ` containers on the parent ``service_kube_node`` during the execution of the ``telemetry.yml`` playbook. This facilitates iDRAC telemetry data collection for the service cluster nodes.
 * If this variable is set to ``false``, the iDRAC telemetry pods and containers will be deployed on the OIM.
 * **Accepted values**: ``true`` or ``false``
 * **Default value**: ``false``"
