@@ -9,7 +9,7 @@ The ``local_repo.yml`` playbook is dependent on the inputs provided to the follo
 ``/opt/omnia/input/project_default/software_config.json``
 ----------------------------------------------------------
 
-Based on the inputs provided to the ``/opt/omnia/input/project_default/software_config.json``, the software packages/images are accessed from the Pulp container and the desired software stack is deployed on the cluster nodes.
+Based on the inputs provided to the ``/opt/omnia/input/project_default/software_config.json``, the software packages/images are downloaded to the Pulp container and the desired software stack is deployed on the cluster nodes.
 
 .. csv-table:: Parameters for Software Configuration
    :file: ../../../Tables/software_config_rhel.csv
@@ -17,10 +17,11 @@ Based on the inputs provided to the ``/opt/omnia/input/project_default/software_
    :keepspace:
    :widths: auto
 
-Here's a sample of the ``software_config.json`` for RHEL clusters:
+Here's a sample of the ``software_config.json`` for multiple architecture RHEL clusters:
 
 ::
 
+    }
     {
     "cluster_os_type": "rhel",
     "cluster_os_version": "9.6",
@@ -30,12 +31,18 @@ Here's a sample of the ``software_config.json`` for RHEL clusters:
         {"name": "amdgpu", "version": "6.3.1", "arch": ["x86_64"]},
         {"name": "cuda", "version": "12.8.0", "arch": ["x86_64","aarch64"]},
         {"name": "ofed", "version": "24.10-3.2.5.0", "arch": ["x86_64"]},
-        {"name": "openldap", "arch": ["x86_64","aarch64"]},
+        {"name": "freeipa", "arch": ["x86_64"]},
+        {"name": "openldap", "arch": ["x86_64"]},
         {"name": "nfs", "arch": ["x86_64","aarch64"]},
-        {"name": "k8s", "version":"1.31.4", "arch": ["x86_64"]},
-        {"name": "service_k8s","version": "1.31.4", "arch": ["x86_64","aarch64"]},
-        {"name": "slurm", "arch": ["x86_64","aarch64"]}
+        {"name": "slurm", "arch": ["x86_64","aarch64"]},
+        {"name": "k8s", "version": "1.31.4", "arch": ["x86_64"]},
+        {"name": "service_k8s", "version": "1.31.4", "arch": ["x86_64"]},
+        {"name": "utils", "arch": ["x86_64"]},
+        {"name": "ucx", "version": "1.15.0", "arch": ["x86_64"]},
+        {"name": "openmpi", "version": "4.1.6", "arch": ["x86_64"]},
+        {"name": "racadm", "arch": ["x86_64"]}
     ],
+
     "amdgpu": [
         {"name": "rocm", "version": "6.3.1" }
     ],
@@ -54,7 +61,7 @@ Here's a sample of the ``software_config.json`` for RHEL clusters:
 
 .. note::
 
-    * To download a software for only x86_64 or aarch64 architecture, the arch key input is not mandatory. It will default to roles_config and the architecture is read accordingly.
+    * To download a software for only x86_64 or aarch64 architecture, the arch field is not mandatory for the softwares.  The architecture is read from roles_config.yml.
       See the following sample:
 
 
@@ -96,7 +103,7 @@ Here's a sample of the ``software_config.json`` for RHEL clusters:
 
         }
 
-    * To download a software with both x86_64 and aarch64 architectures, the arch key input is mandatory. Ensure that you check if the .json files for all the specified architectures are available in the input or configuration file. Else, update the .json files. See the following sample:
+    * To download a software with both x86_64 and aarch64 architectures, the arch field is mandatory. Ensure that you check if the <software>.json files for all the specified architectures are available in the input or configuration file. Else, update the <software>.json files. To download multiple architecture softwares, use the following software.config.json sample: 
 
      ::
 
@@ -136,7 +143,7 @@ Here's a sample of the ``software_config.json`` for RHEL clusters:
 
         }
 
-    * For additional_software support, update the input/config/{arch}/rhel/9.6/additional_software.json file with the required {arch} data, where {arch} can either be x86_64 or aarch64, or a combination of both.
+    * For additional_software support, update the input/config/{arch}/rhel/9.6/additional_software.json file, where {arch} can either be x86_64 or aarch64, or both.
 
 .. note::
 

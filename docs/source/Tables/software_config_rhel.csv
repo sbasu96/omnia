@@ -36,10 +36,10 @@
        * OFED
        * CUDA"
 **softwares**,Mandatory,"* **Type**: JSON list
-* A JSON list of required software with the software version (optional) and architecture type ``aarch64``, ``x86_64`` or both.
+* A JSON list of required software with the software version (optional) and architecture type ``aarch64``, ``x86_64`` or both. The optional arch field can be x86_64, aarch64, or both. If the arch field is not provided by the user then the  default architecture is retrieved from roles_config.yml.
 * The following software should be listed with a version in the list: BeeGFS, AMD GPU, Kubernetes, CUDA, OFED, UCX, and ROCm.
 * A minimum of one software should be provided in the list for ``local_repo.yml`` to execute correctly.
 * The ``software_config.json`` will have the basic softwares present in it. To add additional software stacks, add the software under ``/opt/omnia/input/project_default/software_config.json``.
-* For the list of all applicable softwares based on your ``<cluster_os_type>``, refer the templates at ``examples/template_<os>_software_config.json``. For example, ``examples/template_rhel_software_config.json``.
+* For the list of all applicable softwares based on your ``<cluster_os_type>``, see the templates at ``examples/software_config_template/template_<os>_multi_arch_software_config.json``. For example, ``examples/software_config_template/template_rhel_9.6_multi_arch_software_config.json``.
 
-.. note:: The accepted names for software are taken from ``/opt/omnia/input/project_default/config/<cluster_os_type>/<cluster_os_version>``."
+.. note:: The accepted names for software are taken from ``/opt/omnia/input/project_default/config/<arch>/<cluster_os_type>/<cluster_os_version>``."
