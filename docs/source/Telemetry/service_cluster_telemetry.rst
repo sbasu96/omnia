@@ -45,7 +45,7 @@ Depending on the value of ``idrac_telemetry_collection_type``, either the ``prom
 - iDRAC telemetry pods
 - ``mysqldb``
 - ``activemq``
-- ``telemetry_receiver`
+- ``telemetry_receiver``
 
 The number of iDRAC telemetry pods deployed will be number of ``service_kube_nodes`` mentioned as parents in ``roles_config.yml`` plus an extra telemetry pod to collect the metric data of OIM, management layer nodes, and the service cluster.
 
