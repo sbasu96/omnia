@@ -1,38 +1,42 @@
 ﻿Name,Location,Purpose,Additional Information
-Omnia Logs,/var/log/omnia.log,Omnia Log,"This log is configured by Default. This log can be used to track all changes made by all playbooks in the omnia directory.
+varlogs,/opt/omnia/log/*log,Var Log,This log is configured by default.
+Omnia logs,/opt/omnia/log/core/playbooks/omnia.log,Omnia logs,"This log is configured by Default. This log can be used to track all changes made by all playbooks in the omnia directory.
 
 .. Note:: User can view the combined logs for ``discovery_provision.yml`` and ``omnia.yml`` execution in ``omnia.log`` file."
-Accelerator Logs,/var/log/omnia/accelerator.log,Accelerator Log,This log is configured by default.
-kubespray_telemetry Logs,/var/log/omnia/kubespray_omnia.log,Kubespray Telemetry Log,This log is configured by default.
-Network Logs,/var/log/omnia/network.log,Network Log,This log is configured by default.
-Platform Logs,/var/log/omnia/platforms.log,Platform Log,This log is configured by default.
-Provision Logs,/var/log/omnia/provision.log,Provision Log,This log is configured by default.
-Scheduler Logs,/var/log/omnia/scheduler.log,Scheduler Log,This log is configured by default.
-Security Logs,/var/log/omnia/security.log,Security Log,This log is configured by default.
-Storage Logs,/var/log/omnia/storage.log,Storage Log,This log is configured by default.
-Telemetry Logs,/var/log/omnia/telemetry.log,Telemetry Log,This log is configured by default.
-Utils Logs,/var/log/omnia/utils.log,Utils Log,This log is configured by default.
-Cluster Utilities Logs,/var/log/omnia/utils_cluster.log,Cluster Utils Log,This log is configured by default.
-syslogs,/var/log/messages,System Logging,This log is configured by default.
-Audit Logs,/var/log/audit/audit.log,All Login Attempts,This log is configured by default.
-CRON logs,/var/log/cron,CRON Job Logging,This log is configured by default.
-Pods logs,/var/log/pods/ * / * / * log,k8s pods,This log is configured by default.
-Access Logs,/var/log/dirsrv/slapd-<Realm Name>/access,Directory Server Utilization,This log is available when FreeIPA or 389ds is set up (i.e., when enable_security_support is set to ‘true’).
-Error Log,/var/log/dirsrv/slapd-<Realm Name>/errors,Directory Server Errors,This log is available when FreeIPA or 389ds is set up (i.e., when enable_security_support is set to ‘true’).
-CA Transaction Log,/var/log/pki/pki-tomcat/ca/transactions,FreeIPA PKI Transactions,This log is available when FreeIPA or 389ds is set up (i.e., when enable_security_support is set to ‘true’).
-KRB5KDC,/var/log/krb5kdc.log,KDC Utilization,This log is available when FreeIPA or 389ds is set up (i.e., when enable_security_support is set to ‘true’).
-Secure logs,/var/log/secure,Login Error Codes,This log is available when FreeIPA or 389ds is set up (i.e.,  when enable_security_support is set to ‘true’).
-HTTPD logs,/var/log/httpd/ *,FreeIPA API Calls,This log is available when FreeIPA or 389ds is set up (i.e.,  when enable_security_support is set to ‘true’).
-BeeGFS Logs,/var/log/beegfs-client.log,BeeGFS Logs,This log is configured on BeeGFS client nodes.
-Compute Logs,/var/log/xcat/computes.log,Logs system messages from all cluster nodes.,This log is configured by default.
-Cluster deployment logs,/var/log/xcat/cluster.log,Logs deployment  messages from all cluster nodes.,This log is configured by default.
-Server Network Logs,/var/log/omnia/server_spec_update.log,Server network log,This log is configured by default.
-Local Repository Logs,/var/log/omnia/local_repo.log,Local repository log,This log is configured by default.
-Discovery Logs,/var/log/omnia/discovery.log,Discovery log,This log is configured by default.
-Prepare OIM Logs,/var/log/omnia/prepare_oim.log,Preparing OIM log,This log is configured by default.
-Tools Logs,/var/log/omnia/tools.log,Tools log,This log is configured by default.
-Upgrade Logs,/var/log/omnia/upgrade.log,Upgrade log,This log is configured by default.
-IP Rule Assignment Logs,/var/log/omnia/ip_rule_assignment.log,IP rule assignment log,This log is configured by default.
-Software Update Logs,/var/log/omnia/software_update.log,Software update log,This log is configured by default.
-Performance Profile Logs,/var/log/omnia/performance_profile.log,Peformance profile log,This log is configured by default.
-Benchmark Logs,/var/log/omnia/benchmarks.log,Benchmark messages log ,This log is configured by default.
+accelerator logs,/opt/omnia/log/core/playbooks/accelerator.log,Accelerator logs,This log is configured by default.
+discovery logs,/opt/omnia/log/core/playbooks/discovery.log,Discovery logs,This log is configured by default.
+local_repo log,/opt/omnia/log/core/playbooks/local_repo.log,Local Repository logs,This log is configured by default.
+network logs,/opt/omnia/log/core/playbooks/network.log,Network Logs,This log is configured by default.
+prepre_oim log,/opt/omnia/log/core/playbooks/prepare_oim.log,Prepare OIM Logs,This log is configured by default.
+provision logs,/opt/omnia/log/core/playbooks/provision.log,Provision Logs,This log is configured by default.
+scheduler logs,/opt/omnia/log/core/playbooks/scheduler.log,Scheduler Logs,This log is configured by default.
+security logs,/opt/omnia/log/core/playbooks/security.log,Security Logs,This log is configured by default.
+storage logs,/opt/omnia/log/core/playbooks/storage.log,Storage Logs,This log is configured by default.
+server_spec_update logs,/opt/omnia/log/core/playbooks/server_spec_update.log,Server specification update logs,This log is configured by default.
+telemetry logs,/opt/omnia/log/core/playbooks/telemetry.log,Telemetry logs,This log is configured by default.
+tools logs,/opt/omnia/log/core/playbooks/tools.log,Tool logs,This log is configured by default.
+utils logs,/opt/omnia/log/core/playbooks/utils.log,Utility logs,This log is configured by default.
+credential utility logs,/opt/omnia/log/core/playbooks/credential_utility.log,Credential utility logs,This log is configured by default.
+software_update logs,/opt/omnia/log/core/playbooks/software_update.log,Software update logs,This log is configured by default.
+benchmarks log messages,/opt/omnia/log/core/playbooks/benchmarks.log,Benchmark log  messages,This log is configured by default.
+Cluster Provisioning Logs,/opt/omnia/log/provision/xcat/*log,Cluster provisioning logs,This log is configured by default.
+PCS container - pacemaker logs,/opt/omnia/log/pcs/pacemaker/*log,PCS container - pacemaker logs,This log is configured by default.
+PCS container - corosync logs,/opt/omnia/log/pcs/corosync/*log,PCS container - corosync logs,This log is configured by default.
+iDRAC Telemetry - activemq container logs,/opt/omnia/log/telemetry/activemq/*log,iDRAC Telemetry - activemq container logs,This log is configured by default.
+iDRAC Telemetry - mysqldb container logs,/opt/omnia/log/telemetry/mysqldb/*log,iDRAC Telemetry - mysqldb container logs,This log is configured by default.
+iDRAC Telemetry - idrac_telemetry_receiver container logs,/opt/omnia/log/telemetry/idrac_telemetry_receiver/*log,iDRAC Telemetry - idrac_telemetry_receiver container logs,This log is configured by default.
+Telemetry - prometheus container logs,/opt/omnia/log/telemetry/prometheus/*log,Telemetry - prometheus container logs,This log is configured by default.
+Visualization - grafana container logs,/opt/omnia/log/telemetry/grafana/*log,Visualization - grafana container logs,This log is configured by default.
+Pulp container logs,/opt/omnia/log/pulp/*log,Pulp container logs,This log is configured by default.
+Local repo logs, /opt/omnia/log/local_repo/*log,Local repo logs,This log is configured by default.
+Kubespray logs,/opt/omnia/log/kubespray/*log,Kubespray logs,This log is configured by default.
+Core container logs,/opt/omnia/log/core/container/*log,Core container logs,This log is configured by default.
+squid logs,/opt/omnia/log/squid/*log,SQUID logs,This log is configured by default.
+Omnia input validation report logs,/opt/omnia/log/core/playbooks/validation_omnia_project_default.log,Omnia input validation report logs,This log is configured by default.
+Omnia input validation playbook logs,/opt/omnia/log/core/playbooks/input_validation.log,Omnia input validation playbook logs,This log is configured by default.
+Service nodes pacemaker logs,/opt/omnia/service_nodes/*/log/pcs/pacemaker/*log,Service nodes pacemaker logs,This log is configured by default.
+Service nodes corosync logs,/opt/omnia/service_nodes/*/log/pcs/corosync/*log,Service nodes corosync logs,This log is configured by default.
+Service nodes iDRAC Telemetry - activemq container logs,/opt/omnia/service_nodes/*/log/telemetry/activemq/*log,Service nodes iDRAC Telemetry - activemq container logs,This log is configured by default.
+Service nodes iDRAC Telemetry - mysqldb container logs,/opt/omnia/service_nodes/*/log/telemetry/mysqldb/*log,Service nodes iDRAC Telemetry - mysqldb container logs,This log is configured by default.
+Service nodes iDRAC Telemetry - idrac_telemetry_receiver container logs,/opt/omnia/service_nodes/*/log/telemetry/idrac_telemetry_receiver/*log,Service nodes iDRAC Telemetry - iDRAC telemetry receiver container logs,This log is configured by default.
+Service nodes Telemetry - prometheus container logs,/opt/omnia/service_nodes/*/log/telemetry/prometheus/*lo,Service nodes Telemetry - Prometheus container logs,This log is configured by default.
