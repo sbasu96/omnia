@@ -81,7 +81,7 @@ After ``telemetry.yml`` the Kafka pump captures iDRAC telemetry logs and forward
         --from-beginning \
         --consumer.config /tmp/client.properties | grep CL0 | head -n 3
 
-        For details on using the Kafka consumer, see the `Kafka console consumer documentation <https://docs.confluent.io/kafka/operations-tools/kafka-tools.html?utm_source=chatgpt.com#kafka-console-consumer-sh>`_.
+       For details on using the Kafka consumer, see the `Kafka console consumer documentation <https://docs.confluent.io/kafka/operations-tools/kafka-tools.html?utm_source=chatgpt.com#kafka-console-consumer-sh>`_.
 
 .. note:: Metrics visualization using Grafana is not supported for iDRAC telemetry metrics on service cluster.
 
