@@ -76,29 +76,3 @@ A sample of the ``/opt/omnia/input/project_default/network_spec.yml`` where node
              discover_ranges: ""
              network_gateway: ""
              MTU: "1500"
-
-A sample of the ``/opt/omnia/input/project_default/network_spec.yml`` where nodes are discovered using BMC discovery mechanism is provided below: ::
-
-    ---
-        Networks:
-        - admin_network:
-            nic_name: ""
-            netmask_bits: ""
-            static_range: ""
-            dynamic_range: ""
-            correlation_to_admin: true
-            admin_uncorrelated_node_start_ip: ""
-            primary_oim_admin_ip: ""
-            network_gateway: ""
-            DNS: ""
-            MTU: ""
-
-        - bmc_network:
-            nic_name: "eno1"
-            netmask_bits: "16"
-            static_range: "10.3.0.1-10.3.0.200"
-            dynamic_range: "10.3.1.1-10.3.1.200"
-            reassignment_to_static: true
-            discover_ranges: ""
-            network_gateway: ""
-            MTU: "1500"

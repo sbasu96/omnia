@@ -12,7 +12,7 @@ Kubernetes cluster
 Components of a Kubernetes cluster are:
 
 * **Head node**: In a Kubernetes cluster deployed by Omnia, the head node is nothing but the ``kube_control_plane`` used to manage Kubernetes jobs on the cluster.
-* **Compute nodes**: In a Kubernetes cluster, the ``kube_node``(s) function as the compute nodes.
+* **Compute nodes**: * **Compute nodes**: In a Kubernetes cluster, the ``kube_node``\ (s) function as the compute nodes.
 * **etcd node**: Etcd is an open-source distributed key-value store that is used to store and manage the information that distributed systems need for their operations. It stores the configuration data, state data, and metadata in Kubernetes.
 
 Slurm cluster

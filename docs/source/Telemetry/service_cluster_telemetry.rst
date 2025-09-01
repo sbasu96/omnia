@@ -45,7 +45,7 @@ Depending on the value of ``idrac_telemetry_collection_type``, either the ``kafk
 - iDRAC telemetry pods
 - ``mysqldb``
 - ``activemq``
-- ``idrac-telemetry_receiver``
+- ``idrac-telemetry-receiver``
 
 The number of iDRAC telemetry pods deployed will be number of ``service_kube_nodes`` mentioned as parents in ``roles_config.yml`` plus an extra telemetry pod to collect the metric data of OIM, management layer nodes, and the service cluster.
 
@@ -73,9 +73,16 @@ After ``telemetry.yml`` the Kafka pump captures iDRAC telemetry logs and forward
 
         kubectl get pods -n telemetry
 
-    2. For each of the ``idrac-telemetry`` pods, check the ``idrac_telemetry`` logs by consuming messages with the Kafka consumer. For details on using the Kafka consumer, see the `Kafka console consumer documentation <https://docs.confluent.io/kafka/operations-tools/kafka-tools.html?utm_source=chatgpt.com#kafka-console-consumer-sh>`_. ::
+    2. For each of the ``idrac-telemetry`` pods, use the following command to check the ``idrac_telemetry`` logs with the Kafka consumer. ::
 
-        
+         kafka-console-consumer.sh \
+        --bootstrap-server localhost:9092 \
+        --topic idrac_telemetry \
+        --from-beginning \
+        --consumer.config /tmp/client.properties | grep CL0 | head -n 3
+
+        For details on using the Kafka consumer, see the `Kafka console consumer documentation <https://docs.confluent.io/kafka/operations-tools/kafka-tools.html?utm_source=chatgpt.com#kafka-console-consumer-sh>`_.
+
 .. note:: Metrics visualization using Grafana is not supported for iDRAC telemetry metrics on service cluster.
 
 Accessing the ``mysqldb`` database
