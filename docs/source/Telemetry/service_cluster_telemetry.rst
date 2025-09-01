@@ -65,25 +65,29 @@ After ``telemetry.yml`` has been executed for the service cluster, the Prometheu
 .. note:: Metrics visualization using Grafana is not supported for iDRAC telemetry metrics on service cluster.
 
 iDRAC telemetry logs collected by the Kafka pump
-=======================================================
+================================================
 
-After ``telemetry.yml`` the Kafka pump captures iDRAC telemetry logs and forwards it to a Kafka broker. To view these logs, do the following:
+After applying the ``telemetry.yml`` configuration, the Kafka pump captures iDRAC telemetry logs and forwards them to a Kafka broker. To view these logs, follow the steps below:
 
-    1. First, check if all the telemetry pods are running or not using the below command: ::
+1. First, check if all the telemetry pods are running using the following command:
 
-        kubectl get pods -n telemetry
+   .. code-block:: bash
 
-    2. For each of the ``idrac-telemetry`` pods, use the following command to check the ``idrac_telemetry`` logs with the Kafka consumer. ::
+      kubectl get pods -n telemetry
 
-         kafka-console-consumer.sh \
-        --bootstrap-server localhost:9092 \
-        --topic idrac_telemetry \
-        --from-beginning \
-        --consumer.config /tmp/client.properties | grep CL0 | head -n 3
+2. For each of the ``idrac-telemetry`` pods, use the following command to check the ``idrac_telemetry`` logs with the Kafka consumer:
 
-    For details on using the Kafka consumer, see the `Kafka console consumer documentation <https://docs.confluent.io/kafka/operations-tools/kafka-tools.html?utm_source=chatgpt.com#kafka-console-consumer-sh>`_.
+   .. code-block:: bash
 
-.. note:: Metrics visualization using Grafana is not supported for iDRAC telemetry metrics on service cluster.
+      kafka-console-consumer.sh \
+      --bootstrap-server localhost:9092 \
+      --topic idrac_telemetry \
+      --from-beginning \
+      --consumer.config /tmp/client.properties | grep CL0 | head -n 3
+
+   For details on using the Kafka consumer, see the `Kafka console consumer documentation <https://docs.confluent.io/kafka/operations-tools/kafka-tools.html#kafka-console-consumer-sh>`_.
+
+.. note:: Metrics visualization using Grafana is not supported for iDRAC telemetry metrics on the service cluster.
 
 Accessing the ``mysqldb`` database
 ====================================
