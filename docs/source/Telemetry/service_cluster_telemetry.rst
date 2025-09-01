@@ -75,7 +75,7 @@ After applying the ``telemetry.yml`` configuration, the Kafka pump captures iDRA
 
       kubectl get pods -n telemetry
 
-2. For each of the ``idrac-telemetry`` pods, use Kafka consumer to check the ``idrac_telemetry`` logs. To check ``idrac_telemetry`` using Kafka consumer, run the following command. For details on using the Kafka consumer, see the `Kafka console consumer documentation <https://docs.confluent.io/kafka/operations-tools/kafka-tools.html#kafka-console-consumer-sh>`_.
+2. For each of the ``idrac-telemetry`` pods, use Kafka consumer to view the ``idrac_telemetry`` logs. To view ``idrac_telemetry`` using Kafka consumer, run the following command. For details on using the Kafka consumer, see the `Kafka console consumer documentation <https://docs.confluent.io/kafka/operations-tools/kafka-tools.html#kafka-console-consumer-sh>`_.
 
    .. code-block:: bash
 
