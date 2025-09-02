@@ -67,15 +67,21 @@ After ``telemetry.yml`` has been executed for the service cluster, the Prometheu
 iDRAC telemetry logs collected by the Kafka pump
 ================================================
 
-After applying the ``telemetry.yml`` configuration, the Kafka pump captures iDRAC telemetry logs and forwards them to a Kafka broker. To view these logs, follow the steps below:
+After applying the ``telemetry.yml`` configuration using the Kafka collection type, iDRAC telemetry logs are published to a Kafka topic on the broker. To view the logs, do the following:
 
-1. First, check if all the telemetry pods are running using the following command:
+1. Run the following command to view all telemetry pods,::
 
    .. code-block:: bash
 
       kubectl get pods -n telemetry
 
-2. For each of the ``idrac-telemetry`` pods, use Kafka consumer to view the ``idrac_telemetry`` logs. To view ``idrac_telemetry`` using Kafka consumer, run the following command. For details on using the Kafka consumer, see the `Kafka console consumer documentation <https://docs.confluent.io/kafka/operations-tools/kafka-tools.html#kafka-console-consumer-sh>`_.
+2. Run the following command to access the Kafka pod from which you want to read the logs ::
+
+   .. code-block:: bash
+
+      kubectl exec <kafka-pod> -it  -n telemetry -- bash
+
+3. To read the telemetry logs from the Kafka pod, run the following Kafka console consumer script. For details on using the Kafka consumer, see the `Kafka console consumer documentation <https://docs.confluent.io/kafka/operations-tools/kafka-tools.html#kafka-console-consumer-sh>`_::
 
    .. code-block:: bash
 
