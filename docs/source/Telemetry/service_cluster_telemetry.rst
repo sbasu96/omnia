@@ -20,7 +20,7 @@ Prerequisites
 Steps
 ======
 
-1. In the ``roles_config.yml`` file, specify the service tag of the ``service_kube_node`` or ``service_control_plane`` as the parent for the compute groups (``kube_node``, ``slurm_node``, and ``default``).
+1. In the ``roles_config.yml`` file, specify the service tag of the ``service_kube_node`` or ``service_kube_control_plane`` as the parent for the compute groups (``kube_node``, ``slurm_node``, and ``default``).
 2. Fill up the ``omnia_config.yml`` and ``telemetry_config.yml``:
 
     .. csv-table:: omnia_config.yml
@@ -35,12 +35,18 @@ Steps
 3. Execute the ``telemetry.yml`` playbook. ::
 
     cd telemetry
-    ansible-playbook telemetry.yml -i /opt/omnia_inventory/<service_cluster_name>_cluster_layout
+    ansible-playbook telemetry.yml -i /opt/omnia/omnia_inventory/<service_cluster_name>_cluster_layout
 
 Result
 =======
 
-The iDRAC telemetry pods along with the ``mysqldb``, ``activemq``, ``telemetry_receiver``, and ``prometheus_pump`` containers will get deployed on the ``service_kube_node``.
+Depending on the value of ``idrac_telemetry_collection_type``, either the ``kafka-pump`` or ``prometheus-pump`` container will be deployed. Along with this container, the following components are also deployed on each ``service_kube_node``:
+
+- iDRAC telemetry pods
+- ``mysqldb``
+- ``activemq``
+- ``idrac-telemetry-receiver``
+
 The number of iDRAC telemetry pods deployed will be number of ``service_kube_nodes`` mentioned as parents in ``roles_config.yml`` plus an extra telemetry pod to collect the metric data of OIM, management layer nodes, and the service cluster.
 
 iDRAC telemetry logs collected by the Prometheus pump
@@ -59,19 +65,28 @@ After ``telemetry.yml`` has been executed for the service cluster, the Prometheu
 .. note:: Metrics visualization using Grafana is not supported for iDRAC telemetry metrics on service cluster.
 
 iDRAC telemetry logs collected by the Kafka pump
-=======================================================
+================================================
 
-After ``telemetry.yml`` has been executed for the service cluster, the Kafka pump collects the iDRAC telemetry logs for each pod. To view these logs, do the following:
+After applying the ``telemetry.yml`` configuration, the Kafka pump captures iDRAC telemetry logs and forwards them to a Kafka broker. To view these logs, follow the steps below:
 
-    1. First, check if all the telemetry pods are running or not using the below command: ::
+1. First, check if all the telemetry pods are running using the following command:
 
-        kubectl get pods -n telemetry
+   .. code-block:: bash
 
-    2. For each of the ``idrac-telemetry pod``, check the ``idrac_telemetry`` logs collected by the kafka pump using the below command: ::
+      kubectl get pods -n telemetry
 
-        kubectl logs <idrac-telemetry-pod> -n telemetry -c kafka-pump
+2. For each of the ``idrac-telemetry`` pods, use Kafka consumer to view the ``idrac_telemetry`` logs. To view ``idrac_telemetry`` using Kafka consumer, run the following command. For details on using the Kafka consumer, see the `Kafka console consumer documentation <https://docs.confluent.io/kafka/operations-tools/kafka-tools.html#kafka-console-consumer-sh>`_.
 
-.. note:: Metrics visualization using Grafana is not supported for iDRAC telemetry metrics on service cluster.
+   .. code-block:: bash
+
+      kafka-console-consumer.sh \
+      --bootstrap-server localhost:9092 \
+      --topic idrac_telemetry \
+      --from-beginning \
+      --consumer.config /tmp/client.properties 
+
+   
+.. note:: Metrics visualization using Grafana is not supported for iDRAC telemetry metrics on the service cluster.
 
 Accessing the ``mysqldb`` database
 ====================================
