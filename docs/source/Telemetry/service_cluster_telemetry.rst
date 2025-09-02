@@ -69,17 +69,14 @@ iDRAC telemetry logs collected by the Kafka pump
 
 After applying the ``telemetry.yml`` configuration using the Kafka collection type, iDRAC telemetry logs are published to a Kafka topic on the broker. To view the logs, do the following:
 
-1. Run the following command to view all telemetry pods,::
+1. Use the following command to view all telemetry pods: ::
 
-   .. code-block:: bash
-
+   
       kubectl get pods -n telemetry
 
 2. Run the following command to access the Kafka pod from which you want to read the logs ::
 
-   .. code-block:: bash
-
-      kubectl exec <kafka-pod> -it  -n telemetry -- bash
+       kubectl exec <kafka-pod> -it  -n telemetry -- bash
 
 3. To read the telemetry logs from the Kafka pod, run the following Kafka console consumer script. For details on using the Kafka consumer, see the `Kafka console consumer documentation <https://docs.confluent.io/kafka/operations-tools/kafka-tools.html#kafka-console-consumer-sh>`_::
 
