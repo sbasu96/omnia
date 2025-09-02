@@ -74,7 +74,7 @@ After applying the ``telemetry.yml`` configuration using the Kafka collection ty
    
       kubectl get pods -n telemetry
 
-2. Run the following command to access the Kafka pod from which you want to read the logs ::
+2. Run the following command to access the Kafka pod from which you want to read the logs. ::
 
       kubectl exec <kafka-pod> -it  -n telemetry -- bash
 
