@@ -76,15 +76,15 @@ After applying the ``telemetry.yml`` configuration using the Kafka collection ty
 
 2. Run the following command to access the Kafka pod from which you want to read the logs ::
 
-       kubectl exec <kafka-pod> -it  -n telemetry -- bash
+      kubectl exec <kafka-pod> -it  -n telemetry -- bash
 
 3. To read the telemetry logs from the Kafka pod, run the following Kafka console consumer script. For details on using the Kafka consumer, see the `Kafka console consumer documentation <https://docs.confluent.io/kafka/operations-tools/kafka-tools.html#kafka-console-consumer-sh>`_::
 
-        kafka-console-consumer.sh \
-      --bootstrap-server localhost:9092 \
-      --topic idrac_telemetry \
-      --from-beginning \
-      --consumer.config /tmp/client.properties 
+      kafka-console-consumer.sh 
+       --bootstrap-server localhost:9092 
+       --topic idrac_telemetry 
+       --from-beginning 
+       --consumer.config /tmp/client.properties 
 
    
 .. note:: Metrics visualization using Grafana is not supported for iDRAC telemetry metrics on the service cluster.
