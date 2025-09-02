@@ -21,7 +21,6 @@ Here's a sample of the ``software_config.json`` for multiple architecture RHEL c
 
 ::
 
-    }
     {
     "cluster_os_type": "rhel",
     "cluster_os_version": "9.6",
@@ -105,7 +104,7 @@ Here's a sample of the ``software_config.json`` for multiple architecture RHEL c
 
     * To download a software with both x86_64 and aarch64 architectures, the arch field is mandatory. Ensure that you check if the <software>.json files for all the specified architectures are available in the input or configuration file. Else, update the <software>.json files. To download multiple architecture softwares, use the following software.config.json sample: 
 
-     ::
+      ::
 
         {
             "cluster_os_type": "rhel",
