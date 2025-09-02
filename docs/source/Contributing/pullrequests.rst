@@ -3,7 +3,7 @@ Creating A Pull Request
 
 Contributions to Omnia are made through `Pull Requests (PRs) <https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests>`_.
 
-.. image:: ../images/omnia-branch-structure.png
+.. image:: ../images/omnia-branch-structure-2-0.png
 
 Create an issue
 ----------------
@@ -23,9 +23,9 @@ All work on Omnia should be done in a `fork of the repository <https://help.gith
 Issue branch
 ------------
 
-`Create a new branch <https://help.github.com/en/desktop/contributing-to-projects/creating-a-branch-for-your-work>`_ on your fork of the repository. All contributions should be branched from devel. ::
+`Create a new branch <https://help.github.com/en/desktop/contributing-to-projects/creating-a-branch-for-your-work>`_ on your fork of the repository. All contributions should be branched from release branch. ::
 
-        git checkout devel
+        git checkout <release branch>
         git checkout -b <new-branch-name>
 
 **Branch name:**  The branch name should be based on the issue you are addressing. Use the following pattern to create your new branch name: ``issue-xxxx``, e.g., ``issue-1023``.
