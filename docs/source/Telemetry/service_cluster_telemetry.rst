@@ -80,8 +80,7 @@ After applying the ``telemetry.yml`` configuration using the Kafka collection ty
 
 3. To read the telemetry logs from the Kafka pod, run the following Kafka console consumer script. For details on using the Kafka consumer, see the `Kafka console consumer documentation <https://docs.confluent.io/kafka/operations-tools/kafka-tools.html#kafka-console-consumer-sh>`_::
 
-   .. code-block:: bash
-      kafka-console-consumer.sh \
+        kafka-console-consumer.sh \
       --bootstrap-server localhost:9092 \
       --topic idrac_telemetry \
       --from-beginning \
