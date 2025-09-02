@@ -28,7 +28,7 @@ iDRAC Telemetry - idrac_telemetry_receiver container logs,/opt/omnia/log/telemet
 Telemetry - prometheus container logs,/opt/omnia/log/telemetry/prometheus/*log,Telemetry - prometheus container logs,This log is configured by default.
 Visualization - grafana container logs,/opt/omnia/log/telemetry/grafana/*log,Visualization - grafana container logs,This log is configured by default.
 Pulp container logs,/opt/omnia/log/pulp/*log,Pulp container logs,This log is configured by default.
-Local repo logs, /opt/omnia/log/local_repo/*log,Local repo logs,This log is configured by default.
+Local repo logs,/opt/omnia/log/local_repo/*log,Local repo logs,This log is configured by default.
 Kubespray logs,/opt/omnia/log/kubespray/*log,Kubespray logs,This log is configured by default.
 Core container logs,/opt/omnia/log/core/container/*log,Core container logs,This log is configured by default.
 squid logs,/opt/omnia/log/squid/*log,SQUID logs,This log is configured by default.

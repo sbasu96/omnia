@@ -23,7 +23,7 @@ Configuring UCX and OpenMPI on the cluster
 
 **To install UCX and OpenMPI**
 
-* UCX will be compiled and installed on the NFS share (based on the ``client_share_path`` provided in the ``nfs_client_params`` in  ``input/storage_config.yml``).
+* UCX will be compiled and installed on the NFS share (based on the ``client_share_path`` provided in the ``nfs_client_params`` in  ``/opt/omnia/input/project_default/storage_config.yml``).
 
 * If the cluster uses Slurm and UCX, OpenMPI is configured to compile with the UCX and Slurm on the NFS share (based on the ``client_share_path`` provided in the ``nfs_client_params`` in  ``/opt/omnia/input/project_default/storage_config.yml``).
 
